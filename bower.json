@@ -1,0 +1,30 @@
+{
+  "name": "jquery.dataDisplay",
+  "version": "0.0.1",
+   "authors": [
+    "Graham Dixon <gdixon@assetinfo.co.uk>"
+  ],
+  "description": "Conditionally display & style an element (based on an input form and conditions defined in markup)",
+  "main": "jquery.dataDisplay.js",
+  "keywords": [
+    "jQuery",
+    "Data",
+    "Display",
+    "DataDisplay",
+    "Conditional",
+    "Conditions",
+    "Conditionally display",
+    "Conditionally style"
+  ],
+  "license": "MIT",
+  "homepage": "dataDisplay.js.org",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components"
+  ],
+  "dependencies": {
+    "jquery": "~2.1.3",
+    "requirejs": "~2.1.17"
+  }
+}
