@@ -225,7 +225,9 @@
 ...
 ```
 
-* Any side-affects should be defined after the condition, separated by a double-colon (::). Each condition may hold one or more side-affects where each side-affect is separated by a semicolon ';'. Each side-affect should be a jQuery function (.css, .data, .scrollTop... etc), the element is passed to the execution scope as $this ($this.css(...), $this.data(...), $this.scrollTop(...)... etc).
+* Any side-affects should be defined after the condition, separated by a double-colon (::).<br/>
+Each condition may hold one or more side-affects where each side-affect is separated by a semicolon ';'.</br>
+Each side-affect should be a jQuery function (.css, .data, .scrollTop... etc), the element is passed to the execution scope as $this ($this.css(...), $this.data(...), $this.scrollTop(...)... etc).
 
 ```HTML
 ...
