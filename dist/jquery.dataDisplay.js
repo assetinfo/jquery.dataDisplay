@@ -97,8 +97,8 @@
                     var $this = $(this), conditions = $this.attr(that.settings.condsAttr);
                     if (isNaN(conditions)) {
                         void 0 === that.conditions && (that.conditions = []);
-                        var applyDefaults = that.debounce(function(resets, fields, el, $ctx) {
-                            return that.applyDefaults(resets, fields, el, $ctx);
+                        var applyResets = that.debounce(function(resets, fields, el, $ctx) {
+                            return that.applyResets(resets, fields, el, $ctx);
                         }), applyConditions = that.debounce(function(conditions, fields, el, $ctx) {
                             return that.applyConditions(conditions, fields, el, $ctx);
                         }), styles = void 0 !== $this.attr("style") ? $this.attr("style") : "", resets = void 0 !== $this.attr(that.settings.resetsAttr) ? $this.attr(that.settings.resetsAttr) : "", resetFields = that.findFields(resets), conditionFields = that.findFields(conditions), n = that.conditions.length, fireEvents = "change" + that.settings.eventName + (that.settings.keyEventsFire ? " keyup" + that.settings.eventName : "");
@@ -113,10 +113,10 @@
                                 conditions: conditions,
                                 conditionFields: conditionFields
                             }, function(e) {
-                                applyDefaults(e.data.resets, e.data.resetFields, e.data.el, e.data.context), applyConditions(e.data.conditions, e.data.conditionFields, e.data.el, e.data.context);
+                                applyResets(e.data.resets, e.data.resetFields, e.data.el, e.data.context), applyConditions(e.data.conditions, e.data.conditionFields, e.data.el, e.data.context);
                             });
                         }
-                        $this.attr(that.settings.resetsAttr, n).attr(that.settings.condsAttr, n), that.applyDefaults(resets, resetFields, $this, $ctx), 
+                        $this.attr(that.settings.resetsAttr, n).attr(that.settings.condsAttr, n), that.applyResets(resets, resetFields, $this, $ctx), 
                         that.settings.initFire && applyConditions(conditions, conditionFields, $this, $ctx), 
                         that.conditions[n] = {
                             this: $this,
@@ -144,7 +144,7 @@
             return '[name*="' + field + '"]';
         }, dataDisplay.escapeRegExp = function(str) {
             return str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");
-        }, dataDisplay.applyDefaults = function(resets, fields, el, $ctx) {
+        }, dataDisplay.applyResets = function(resets, fields, el, $ctx) {
             $(el, $ctx).hide(), resets = this.replaceFieldValHolders(resets, fields), new Function("$this", resets || "")(el);
         }, dataDisplay.applyConditions = function(conditions, fields, el, $ctx) {
             var that = this;

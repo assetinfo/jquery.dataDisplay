@@ -258,8 +258,8 @@
                                 that.conditions = [];
                             }
                             // apply the default state
-                            var applyDefaults = that.debounce(function (resets, fields, el, $ctx) {
-                                return that.applyDefaults(resets, fields, el, $ctx);
+                            var applyResets = that.debounce(function (resets, fields, el, $ctx) {
+                                return that.applyResets(resets, fields, el, $ctx);
                             });
                             // apply the main debounce logic
                             var applyConditions = that.debounce(function (conditions, fields, el, $ctx) {
@@ -295,7 +295,7 @@
                                     conditionFields: conditionFields
                                 }, function (e) {
                                     // apply the default conditions
-                                    applyDefaults(e.data.resets, e.data.resetFields, e.data.el, e.data.context);
+                                    applyResets(e.data.resets, e.data.resetFields, e.data.el, e.data.context);
                                     // before applying the conditionally displayed rules
                                     applyConditions(e.data.conditions, e.data.conditionFields, e.data.el, e.data.context);
                                 });
@@ -304,7 +304,7 @@
                             $this.attr(that.settings.resetsAttr, n)
                                  .attr(that.settings.condsAttr, n);
                             // apply defaults as defined in current context
-                            that.applyDefaults(resets, resetFields, $this, $ctx);
+                            that.applyResets(resets, resetFields, $this, $ctx);
                             // fire the conditions once onload -- useful for when we have a complete data set
                             if (that.settings.initFire) {
                                 applyConditions(conditions, conditionFields, $this, $ctx);
@@ -406,16 +406,16 @@
             };
 
             /**
-             * this.applyDefaults()<br/><br/>Apply the defaults as defined against the el
+             * this.applyResets()<br/><br/>Apply the defaults as defined against the el
              *
-             * @function DataDisplay.applyDefaults
+             * @function DataDisplay.applyResets
              * @param {string} resets the reset statements defined against the element
              * @param {array} fields an array of all {variables} defined in the conditions string
              * @param {object} el the element we are applying defaluts for
              * @param {object} ctx the outer element we can use as context
              * @memberOf DataDisplay
              */
-            dataDisplay.applyDefaults = function (resets, fields, el, $ctx) {
+            dataDisplay.applyResets = function (resets, fields, el, $ctx) {
                 // default action is to hide the element
                 $(el, $ctx).hide();
                 // for each field present in the conditions, replace its {var} with its value
