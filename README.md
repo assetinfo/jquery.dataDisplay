@@ -1,6 +1,6 @@
 # [jquery.dataDisplay](https://github.com/assetinfo/jquery.dataDisplay)         [![Build Status](https://travis-ci.org/assetinfo/jquery.dataDisplay.png)](https://travis-ci.org/assetinfo/jquery.dataDisplay)
 
-   >jquery.dataDisplay.js aids the developer in writing concise conditions against elements within a form based setting, in order to control the display of elements based on the state of the form.
+   >jquery.dataDisplay.js aids the developer in writing concise conditions against elements within a form based setting, in order to control the display of elements based on the state of a form.
 
 --------
 
@@ -231,8 +231,8 @@ Each side-affect should be a jQuery function (.css, .data, .scrollTop... etc), t
 
 ```HTML
 ...
-    data-display="length({inputTest}) is greater than 6
-        :: $this.css('background', '#000'); $this.css('font-size', '16px');"
+    data-display="length({inputTest}) is greater than 6 ::
+        $this.css('background', '#000'); $this.css('font-size', '16px');"
 ...
 ```
 
@@ -240,16 +240,16 @@ Each side-affect should be a jQuery function (.css, .data, .scrollTop... etc), t
 
 ```HTML
 ...
-    data-display="length({inputTest}) is greater than 6
-        :: $this.css('background', '#000');"
+    data-display="length({inputTest}) is greater than 6 ::
+        $this.css('background', '#000');"
     data-display-resets="$this.css('background', '#fff');"
 ...
 ```
 * Conditions may be grouped in brackets ({condition} == "value" || {condition} == "value2")
 ```HTML
 ...
-    data-display="(length({inputTest}) is greater than 6 && length({inputTest}) is less than 12)
-        :: $this.css('background', '#000');"
+    data-display="(length({inputTest}) is greater than 6 && length({inputTest}) is less than 12) ::
+        $this.css('background', '#000');"
     data-display-resets="$this.css('background', '#fff');"
 ...
 ```
@@ -267,10 +267,10 @@ Each side-affect should be a jQuery function (.css, .data, .scrollTop... etc), t
 ```HTML
 ...
     data-display="
-        length({inputTest}) is greater than 6
-            :: $this.css('background', '#000'); ||
-        length({inputTest}) is greater than 12
-            :: $this.css('background', '#ddd');"
+        length({inputTest}) is greater than 6 ::
+            $this.css('background', '#000'); ||
+        length({inputTest}) is greater than 12 ::
+            $this.css('background', '#ddd');"
     data-display-resets="$this.css('background', '#fff');"
 ...
 ```
