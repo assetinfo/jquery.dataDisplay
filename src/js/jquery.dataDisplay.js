@@ -361,52 +361,6 @@
             };
 
             /**
-             * this.findFields()<br/><br/>Find the fields defined across the entire condition
-             *
-             * @function DataDisplay.findFields
-             * @param {string} conditions the conditions defined against the element
-             * @return {array} an array of all {variables} defined in the confitions string
-             * @memberof DataDisplay
-             */
-            dataDisplay.findFields = function (conditions) {
-                // find all the {fields} used in the given conditions (String)
-                var fields = [];
-                // simple regex pattern to patch anything between {}
-                var r = /{([^}]+)}/gi;
-                // find the fields defined in the conditions
-                while ((m = r.exec(conditions)) != null) {
-                    fields[fields.length] = m[1];
-                }
-                return fields;
-            };
-
-            /**
-             * this.getFieldSelector()<br/><br/>Return a string selector which assumes field relates to a name, eg [name*="..."]
-             *
-             * @function DataDisplay.getFieldSelector
-             * @param {string} field the field we want a selector for
-             * @return {string} the field wrapped in a name selector
-             * @memberof DataDisplay
-             */
-            dataDisplay.getFieldSelector = function (field) {
-                // return the provided field name wrapped in a name selctor
-                return '[name*="' + field + '"]';
-            };
-
-            /**
-             * this.escapeRegExp()<br/><br/>Return a string which has been appropriately escaped ready for a regex expression
-             *
-             * @function DataDisplay.escapeRegExp
-             * @param {string} str the string we want to clean
-             * @return {string} the clean string
-             * @memberof DataDisplay
-             */
-            dataDisplay.escapeRegExp = function (str) {
-                // escape the given string, allow special chars to safely appear in regex expression
-                return str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");
-            };
-
-            /**
              * this.applyResets()<br/><br/>Apply the defaults as defined against the el
              *
              * @function DataDisplay.applyResets
@@ -477,50 +431,6 @@
             };
 
             /**
-             * this.replaceFieldValHolders()<br/><br/>Replace a {variable} field in a condition
-             *
-             * @function DataDisplay.replaceFieldValHolders
-             * @param {string} condition the condition being considered
-             * @param {string} fields the fields being replaced
-             * @memberof DataDisplay
-             */
-            dataDisplay.replaceFieldValHolders = function (conditions, fields) {
-                // hold outer ctx;
-                var that = this;
-                // ensure the fields are presented as an array
-                fields = (typeof fields == "string" ? [fields] : fields);
-                // for each field in the conditions string, replace its {var} with its value
-                for (i = 0; i < fields.length; i++) {
-                    // grab the field selector
-                    var field = fields[i];
-                    // get a selector for the given field
-                    var fieldSelector = that.getFieldSelector(field);
-                    // replace the given field with the value of the fieldSelector in the conditions
-                    var fieldValue = '';
-                    var parseVal = '';
-                    // check that the given field has a value
-                    if (typeof $(fieldSelector + ':checked').val() !== "undefined") {
-                        // first check for radio/checkbox - failover to inputs
-                        fieldValue = $(fieldSelector + ':checked').val();
-                    } else {
-                        fieldValue = $(fieldSelector).val();
-                    }
-                    // when value is present replace {var}
-                    if (typeof fieldValue !== 'undefined') {
-                        if (isNaN(fieldValue) == true) {
-                            parseVal = '\"' + encodeURIComponent(fieldValue) + '\"';
-                        } else {
-                            parseVal = parseFloat(fieldValue);
-                        }
-                        // replace the {} var place holder with real safely encoded value
-                        conditions = conditions.replace(new RegExp('{' + that.escapeRegExp(field) + '}', 'g'), parseVal);
-                    }
-                }
-                // fields have been replaced throughout the entire condition list with their respective values
-                return conditions;
-            };
-
-            /**
              * this.showOnCondition()<br/><br/>Show the el based on condition
              *
              * @function DataDisplay.showOnCondition
@@ -572,6 +482,96 @@
                         }
                     }
                 }
+            };
+            
+            /**
+             * this.findFields()<br/><br/>Find the fields defined across the entire condition
+             *
+             * @function DataDisplay.findFields
+             * @param {string} conditions the conditions defined against the element
+             * @return {array} an array of all {variables} defined in the confitions string
+             * @memberof DataDisplay
+             */
+            dataDisplay.findFields = function (conditions) {
+                // find all the {fields} used in the given conditions (String)
+                var fields = [];
+                // simple regex pattern to patch anything between {}
+                var r = /{([^}]+)}/gi;
+                // find the fields defined in the conditions
+                while ((m = r.exec(conditions)) != null) {
+                    fields[fields.length] = m[1];
+                }
+                return fields;
+            };
+
+            /**
+             * this.getFieldSelector()<br/><br/>Return a string selector which assumes field relates to a name, eg [name*="..."]
+             *
+             * @function DataDisplay.getFieldSelector
+             * @param {string} field the field we want a selector for
+             * @return {string} the field wrapped in a name selector
+             * @memberof DataDisplay
+             */
+            dataDisplay.getFieldSelector = function (field) {
+                // return the provided field name wrapped in a name selctor
+                return '[name*="' + field + '"]';
+            };
+
+            /**
+             * this.replaceFieldValHolders()<br/><br/>Replace a {variable} field in a condition
+             *
+             * @function DataDisplay.replaceFieldValHolders
+             * @param {string} condition the condition being considered
+             * @param {string} fields the fields being replaced
+             * @memberof DataDisplay
+             */
+            dataDisplay.replaceFieldValHolders = function (conditions, fields) {
+                // hold outer ctx;
+                var that = this;
+                // ensure the fields are presented as an array
+                fields = (typeof fields == "string" ? [fields] : fields);
+                // for each field in the conditions string, replace its {var} with its value
+                for (i = 0; i < fields.length; i++) {
+                    // grab the field selector
+                    var field = fields[i];
+                    // get a selector for the given field
+                    var fieldSelector = that.getFieldSelector(field);
+                    // replace the given field with the value of the fieldSelector in the conditions
+                    var fieldValue = '';
+                    var parseVal = '';
+                    // check that the given field has a value
+                    if (typeof $(fieldSelector + ':checked').val() !== "undefined") {
+                        // first check for radio/checkbox - failover to inputs
+                        fieldValue = $(fieldSelector + ':checked').val();
+                    } else {
+                        fieldValue = $(fieldSelector).val();
+                    }
+                    // when value is present replace {var}
+                    if (typeof fieldValue !== 'undefined') {
+                        if (isNaN(fieldValue) == true) {
+                            parseVal = '\"' + encodeURIComponent(fieldValue) + '\"';
+                        } else {
+                            parseVal = parseFloat(fieldValue);
+                        }
+                        // replace the {} var place holder with real safely encoded value
+                        conditions = conditions.replace(new RegExp('{' + that.escapeRegExp(field) + '}', 'g'), parseVal);
+                    }
+                }
+                // fields have been replaced throughout the entire condition list with their respective values
+                return conditions;
+            };
+
+            /**
+             * this.escapeRegExp()<br/><br/>Return a string which has been appropriately escaped ready for a regex expression
+             *
+             * @function DataDisplay.escapeRegExp
+             * @param {string} str the string we want to clean
+             * @return {string} the clean string
+             * @memberof DataDisplay
+             */
+            dataDisplay.escapeRegExp = function (str) {
+                // escape the given string, allow special chars to safely appear in regex expression
+                return str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");
             };
 
             /**

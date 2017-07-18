@@ -137,13 +137,6 @@
                     timeout = null, execAsap || func.apply(context, args);
                 }, threshold), callNow && func.apply(context, args);
             };
-        }, dataDisplay.findFields = function(conditions) {
-            for (var fields = [], r = /{([^}]+)}/gi; null != (m = r.exec(conditions)); ) fields[fields.length] = m[1];
-            return fields;
-        }, dataDisplay.getFieldSelector = function(field) {
-            return '[name*="' + field + '"]';
-        }, dataDisplay.escapeRegExp = function(str) {
-            return str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");
         }, dataDisplay.applyResets = function(resets, fields, el, $ctx) {
             $(el, $ctx).hide(), resets = this.replaceFieldValHolders(resets, fields), new Function("$this", resets || "")(el);
         }, dataDisplay.applyConditions = function(conditions, fields, el, $ctx) {
@@ -156,14 +149,6 @@
                 var conditionalPartsSplit = conditionalParts[i].split("::");
                 1 == conditionalPartsSplit.length ? that.showOnCondition(conditionalParts[i], el) : that.funcOnCondition(conditionalPartsSplit, el);
             }
-        }, dataDisplay.replaceFieldValHolders = function(conditions, fields) {
-            var that = this;
-            for (fields = "string" == typeof fields ? [ fields ] : fields, i = 0; i < fields.length; i++) {
-                var field = fields[i], fieldSelector = that.getFieldSelector(field), fieldValue = "", parseVal = "";
-                void 0 !== (fieldValue = void 0 !== $(fieldSelector + ":checked").val() ? $(fieldSelector + ":checked").val() : $(fieldSelector).val()) && (parseVal = 1 == isNaN(fieldValue) ? '"' + encodeURIComponent(fieldValue) + '"' : parseFloat(fieldValue), 
-                conditions = conditions.replace(new RegExp("{" + that.escapeRegExp(field) + "}", "g"), parseVal));
-            }
-            return conditions;
         }, dataDisplay.showOnCondition = function(conditions, el) {
             var condition = "return (" + (conditions = conditions.replace(/;(\s+)?$/, "")) + ");";
             1 == new Function(condition)() && $(el).show();
@@ -176,6 +161,21 @@
                     new Function("$this", outcomes)(el);
                 }
             }
+        }, dataDisplay.findFields = function(conditions) {
+            for (var fields = [], r = /{([^}]+)}/gi; null != (m = r.exec(conditions)); ) fields[fields.length] = m[1];
+            return fields;
+        }, dataDisplay.getFieldSelector = function(field) {
+            return '[name*="' + field + '"]';
+        }, dataDisplay.replaceFieldValHolders = function(conditions, fields) {
+            var that = this;
+            for (fields = "string" == typeof fields ? [ fields ] : fields, i = 0; i < fields.length; i++) {
+                var field = fields[i], fieldSelector = that.getFieldSelector(field), fieldValue = "", parseVal = "";
+                void 0 !== (fieldValue = void 0 !== $(fieldSelector + ":checked").val() ? $(fieldSelector + ":checked").val() : $(fieldSelector).val()) && (parseVal = 1 == isNaN(fieldValue) ? '"' + encodeURIComponent(fieldValue) + '"' : parseFloat(fieldValue), 
+                conditions = conditions.replace(new RegExp("{" + that.escapeRegExp(field) + "}", "g"), parseVal));
+            }
+            return conditions;
+        }, dataDisplay.escapeRegExp = function(str) {
+            return str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");
         }, dataDisplay.destroy = function(undefined) {
             var that = this;
             return $(that.el).each(function() {

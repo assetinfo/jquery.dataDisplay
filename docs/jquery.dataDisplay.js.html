@@ -25,7 +25,7 @@
 <label for="nav-trigger" class="overlay"></label>
 
 <nav>
-    <li class="nav-link nav-home-link"><a href="index.html">Home</a></li><li class="nav-heading">Namespaces</li><li class="nav-heading"><span class="nav-item-type type-namespace">N</span><span class="nav-item-name"><a href="$.fn.dataDisplay.html">$.fn.dataDisplay</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="$.fn.dataDisplay.html#dataDisplay">dataDisplay</a></span></li><li class="nav-heading">Classes</li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="DataDisplay.html">DataDisplay</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="DataDisplay.html#.applyConditions">applyConditions</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="DataDisplay.html#.applyResets">applyResets</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="DataDisplay.html#.debounce">debounce</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="DataDisplay.html#.destroy">destroy</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="DataDisplay.html#.escapeRegExp">escapeRegExp</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="DataDisplay.html#.findFields">findFields</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="DataDisplay.html#.funcOnCondition">funcOnCondition</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="DataDisplay.html#.getFieldSelector">getFieldSelector</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="DataDisplay.html#.init">init</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="DataDisplay.html#.replaceFieldValHolders">replaceFieldValHolders</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="DataDisplay.html#.showOnCondition">showOnCondition</a></span></li>
+    <li class="nav-link nav-home-link"><a href="index.html">Home</a></li><li class="nav-heading">Namespaces</li><li class="nav-heading"><span class="nav-item-type type-namespace">N</span><span class="nav-item-name"><a href="$.fn.dataDisplay.html">$.fn.dataDisplay</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="$.fn.dataDisplay.html#dataDisplay">dataDisplay</a></span></li><li class="nav-heading">Classes</li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="DataDisplay.html">DataDisplay</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="DataDisplay.html#.init">init</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="DataDisplay.html#.debounce">debounce</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="DataDisplay.html#.applyResets">applyResets</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="DataDisplay.html#.applyConditions">applyConditions</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="DataDisplay.html#.showOnCondition">showOnCondition</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="DataDisplay.html#.funcOnCondition">funcOnCondition</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="DataDisplay.html#.findFields">findFields</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="DataDisplay.html#.getFieldSelector">getFieldSelector</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="DataDisplay.html#.replaceFieldValHolders">replaceFieldValHolders</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="DataDisplay.html#.escapeRegExp">escapeRegExp</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="DataDisplay.html#.destroy">destroy</a></span></li>
 </nav>
 
 <div id="main">
@@ -403,52 +403,6 @@
             };
 
             /**
-             * this.findFields()&lt;br/>&lt;br/>Find the fields defined across the entire condition
-             *
-             * @function DataDisplay.findFields
-             * @param {string} conditions the conditions defined against the element
-             * @return {array} an array of all {variables} defined in the confitions string
-             * @memberof DataDisplay
-             */
-            dataDisplay.findFields = function (conditions) {
-                // find all the {fields} used in the given conditions (String)
-                var fields = [];
-                // simple regex pattern to patch anything between {}
-                var r = /{([^}]+)}/gi;
-                // find the fields defined in the conditions
-                while ((m = r.exec(conditions)) != null) {
-                    fields[fields.length] = m[1];
-                }
-                return fields;
-            };
-
-            /**
-             * this.getFieldSelector()&lt;br/>&lt;br/>Return a string selector which assumes field relates to a name, eg [name*="..."]
-             *
-             * @function DataDisplay.getFieldSelector
-             * @param {string} field the field we want a selector for
-             * @return {string} the field wrapped in a name selector
-             * @memberof DataDisplay
-             */
-            dataDisplay.getFieldSelector = function (field) {
-                // return the provided field name wrapped in a name selctor
-                return '[name*="' + field + '"]';
-            };
-
-            /**
-             * this.escapeRegExp()&lt;br/>&lt;br/>Return a string which has been appropriately escaped ready for a regex expression
-             *
-             * @function DataDisplay.escapeRegExp
-             * @param {string} str the string we want to clean
-             * @return {string} the clean string
-             * @memberof DataDisplay
-             */
-            dataDisplay.escapeRegExp = function (str) {
-                // escape the given string, allow special chars to safely appear in regex expression
-                return str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&amp;");
-            };
-
-            /**
              * this.applyResets()&lt;br/>&lt;br/>Apply the defaults as defined against the el
              *
              * @function DataDisplay.applyResets
@@ -519,50 +473,6 @@
             };
 
             /**
-             * this.replaceFieldValHolders()&lt;br/>&lt;br/>Replace a {variable} field in a condition
-             *
-             * @function DataDisplay.replaceFieldValHolders
-             * @param {string} condition the condition being considered
-             * @param {string} fields the fields being replaced
-             * @memberof DataDisplay
-             */
-            dataDisplay.replaceFieldValHolders = function (conditions, fields) {
-                // hold outer ctx;
-                var that = this;
-                // ensure the fields are presented as an array
-                fields = (typeof fields == "string" ? [fields] : fields);
-                // for each field in the conditions string, replace its {var} with its value
-                for (i = 0; i &lt; fields.length; i++) {
-                    // grab the field selector
-                    var field = fields[i];
-                    // get a selector for the given field
-                    var fieldSelector = that.getFieldSelector(field);
-                    // replace the given field with the value of the fieldSelector in the conditions
-                    var fieldValue = '';
-                    var parseVal = '';
-                    // check that the given field has a value
-                    if (typeof $(fieldSelector + ':checked').val() !== "undefined") {
-                        // first check for radio/checkbox - failover to inputs
-                        fieldValue = $(fieldSelector + ':checked').val();
-                    } else {
-                        fieldValue = $(fieldSelector).val();
-                    }
-                    // when value is present replace {var}
-                    if (typeof fieldValue !== 'undefined') {
-                        if (isNaN(fieldValue) == true) {
-                            parseVal = '\"' + encodeURIComponent(fieldValue) + '\"';
-                        } else {
-                            parseVal = parseFloat(fieldValue);
-                        }
-                        // replace the {} var place holder with real safely encoded value
-                        conditions = conditions.replace(new RegExp('{' + that.escapeRegExp(field) + '}', 'g'), parseVal);
-                    }
-                }
-                // fields have been replaced throughout the entire condition list with their respective values
-                return conditions;
-            };
-
-            /**
              * this.showOnCondition()&lt;br/>&lt;br/>Show the el based on condition
              *
              * @function DataDisplay.showOnCondition
@@ -614,6 +524,96 @@
                         }
                     }
                 }
+            };
+            
+            /**
+             * this.findFields()&lt;br/>&lt;br/>Find the fields defined across the entire condition
+             *
+             * @function DataDisplay.findFields
+             * @param {string} conditions the conditions defined against the element
+             * @return {array} an array of all {variables} defined in the confitions string
+             * @memberof DataDisplay
+             */
+            dataDisplay.findFields = function (conditions) {
+                // find all the {fields} used in the given conditions (String)
+                var fields = [];
+                // simple regex pattern to patch anything between {}
+                var r = /{([^}]+)}/gi;
+                // find the fields defined in the conditions
+                while ((m = r.exec(conditions)) != null) {
+                    fields[fields.length] = m[1];
+                }
+                return fields;
+            };
+
+            /**
+             * this.getFieldSelector()&lt;br/>&lt;br/>Return a string selector which assumes field relates to a name, eg [name*="..."]
+             *
+             * @function DataDisplay.getFieldSelector
+             * @param {string} field the field we want a selector for
+             * @return {string} the field wrapped in a name selector
+             * @memberof DataDisplay
+             */
+            dataDisplay.getFieldSelector = function (field) {
+                // return the provided field name wrapped in a name selctor
+                return '[name*="' + field + '"]';
+            };
+
+            /**
+             * this.replaceFieldValHolders()&lt;br/>&lt;br/>Replace a {variable} field in a condition
+             *
+             * @function DataDisplay.replaceFieldValHolders
+             * @param {string} condition the condition being considered
+             * @param {string} fields the fields being replaced
+             * @memberof DataDisplay
+             */
+            dataDisplay.replaceFieldValHolders = function (conditions, fields) {
+                // hold outer ctx;
+                var that = this;
+                // ensure the fields are presented as an array
+                fields = (typeof fields == "string" ? [fields] : fields);
+                // for each field in the conditions string, replace its {var} with its value
+                for (i = 0; i &lt; fields.length; i++) {
+                    // grab the field selector
+                    var field = fields[i];
+                    // get a selector for the given field
+                    var fieldSelector = that.getFieldSelector(field);
+                    // replace the given field with the value of the fieldSelector in the conditions
+                    var fieldValue = '';
+                    var parseVal = '';
+                    // check that the given field has a value
+                    if (typeof $(fieldSelector + ':checked').val() !== "undefined") {
+                        // first check for radio/checkbox - failover to inputs
+                        fieldValue = $(fieldSelector + ':checked').val();
+                    } else {
+                        fieldValue = $(fieldSelector).val();
+                    }
+                    // when value is present replace {var}
+                    if (typeof fieldValue !== 'undefined') {
+                        if (isNaN(fieldValue) == true) {
+                            parseVal = '\"' + encodeURIComponent(fieldValue) + '\"';
+                        } else {
+                            parseVal = parseFloat(fieldValue);
+                        }
+                        // replace the {} var place holder with real safely encoded value
+                        conditions = conditions.replace(new RegExp('{' + that.escapeRegExp(field) + '}', 'g'), parseVal);
+                    }
+                }
+                // fields have been replaced throughout the entire condition list with their respective values
+                return conditions;
+            };
+
+            /**
+             * this.escapeRegExp()&lt;br/>&lt;br/>Return a string which has been appropriately escaped ready for a regex expression
+             *
+             * @function DataDisplay.escapeRegExp
+             * @param {string} str the string we want to clean
+             * @return {string} the clean string
+             * @memberof DataDisplay
+             */
+            dataDisplay.escapeRegExp = function (str) {
+                // escape the given string, allow special chars to safely appear in regex expression
+                return str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&amp;");
             };
 
             /**
@@ -680,7 +680,7 @@
 <br class="clear">
 
 <footer align="center">
-    Generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.3</a> on Tue Jul 18 2017 23:47:42 GMT+0100 (BST) using the Minami theme.
+    Generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.3</a> on Wed Jul 19 2017 00:18:03 GMT+0100 (BST) using the Minami theme.
      <br/> Copyright © 2014-2017 Graham Dixon, MML LTD - Assetinfo.</a>
 </footer>
 
