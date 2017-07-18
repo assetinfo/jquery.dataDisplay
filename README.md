@@ -246,7 +246,7 @@ Each side-affect should be a jQuery function (.css, .data, .scrollTop... etc), t
     data-display-resets="$this.css('background', '#fff');"
 ...
 ```
-* Conditions may be grouped in brackets ({condition} == "value" &#124;&#124; {condition} == "value2")
+* Logical conditions can be grouped in brackets ({condition} == "value" &#124;&#124; {condition} == "value2")
 ```HTML
 ...
     data-display="(length({inputTest}) is greater than 6 && length({inputTest}) is less than 12) ::
@@ -269,7 +269,7 @@ Each side-affect should be a jQuery function (.css, .data, .scrollTop... etc), t
 ...
     data-display="
         length({inputTest}) is greater than 6 ::
-            $this.css('background', '#000'); &#124;&#124;
+            $this.css('background', '#000'); ||;
         length({inputTest}) is greater than 12 ::
             $this.css('background', '#ddd');"
     data-display-resets="$this.css('background', '#fff');"
