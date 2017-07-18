@@ -269,7 +269,7 @@ Each side-affect should be a jQuery function (.css, .data, .scrollTop... etc), t
 ...
     data-display="
         length({inputTest}) is greater than 6 ::
-            $this.css('background', '#000'); ||;
+            $this.css('background', '#000'); ||
         length({inputTest}) is greater than 12 ::
             $this.css('background', '#ddd');"
     data-display-resets="$this.css('background', '#fff');"
