@@ -10,6 +10,8 @@
   "templates": {
     "cleverLinks": false,
     "monospaceLinks": false,
+    "useLongnameInNav": false,
+    "showInheritedInNav": true,
     "default": {
       "outputSourceFiles": true
     },
@@ -17,7 +19,6 @@
     "footer"          : "",
     "copyright"       : "Copyright © 2014-2017 Graham Dixon, MML LTD - Assetinfo.</a>",
     "navType"         : "vertical",
-    "theme"           : "oblivion",
     "linenums"        : true,
     "collapseSymbols" : false,
     "inverseNav"      : true

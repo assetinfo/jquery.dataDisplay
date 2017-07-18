@@ -60,9 +60,12 @@ module.exports = function(grunt) {
             dist: {
                 src: ['src/js/*.js', 'README.md'],
                 options: {
+                    encoding: "utf8",
+                    private: true,
+                    recurse: true,
                     destination: 'docs',
                     configure: './docsConf.json',
-                    template: './node_modules/jsdoc-oblivion/template'
+                    template: './node_modules/minami'
                 }
             }
         },

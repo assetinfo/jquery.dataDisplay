@@ -1,4 +1,45 @@
-/*!
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>jquery.dataDisplay.js - Documentation</title>
+
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav>
+    <li class="nav-link nav-home-link"><a href="index.html">Home</a></li><li class="nav-heading">Classes</li><li class="nav-heading"><span class="nav-item-type type-class">C</span><span class="nav-item-name"><a href="DataDisplay.html">DataDisplay</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="DataDisplay.html#.applyConditions">applyConditions</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="DataDisplay.html#.applyResets">applyResets</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="DataDisplay.html#.debounce">debounce</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="DataDisplay.html#.destroy">destroy</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="DataDisplay.html#.escapeRegExp">escapeRegExp</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="DataDisplay.html#.findFields">findFields</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="DataDisplay.html#.funcOnCondition">funcOnCondition</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="DataDisplay.html#.getFieldSelector">getFieldSelector</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="DataDisplay.html#.init">init</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="DataDisplay.html#.replaceFieldValHolders">replaceFieldValHolders</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="DataDisplay.html#.showOnCondition">showOnCondition</a></span></li><li class="nav-heading">Namespaces</li><li class="nav-heading"><span class="nav-item-type type-namespace">N</span><span class="nav-item-name"><a href="$.fn.dataDisplay.html">$.fn.dataDisplay</a></span></li><li class="nav-item"><span class="nav-item-type type-function">F</span><span class="nav-item-name"><a href="$.fn.dataDisplay.html">dataDisplay</a></span></li>
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">jquery.dataDisplay.js</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/*!
  * Script: jQuery.dataDisplay.js
  * Description: jquery.dataDisplay aids the developer in writing concise conditions against elements within a form based setting, in order to control the display of elements based on the state of a form.
  * Copyright: Copyright (c) 2014-2017 Graham Dixon - http://gdixon.co.uk/
@@ -9,7 +50,7 @@
  * Version: 0.0.1
  */
 ;(function (factory) {
-    if (typeof define === 'function' && define.amd) {
+    if (typeof define === 'function' &amp;&amp; define.amd) {
         // AMD. Register as an anonymous module depending on jQuery
         define(['jquery'], factory);
     } else {
@@ -20,19 +61,19 @@
     /**
      * @fileOverview $.fn.dataDisplay - A jQuery library that aids the developer in writing concise conditions against elements within a form based setting, in order to control the display of elements based on the state of the form.
      *
-     * @example <caption>Basic HTML syntax and structure example:</caption>
-     * <div id="container">
-     *     <input name="inputTest" type="value"/>
-     *     <div class="dataDisplay"
+     * @example &lt;caption>Basic HTML syntax and structure example:&lt;/caption>
+     * &lt;div id="container">
+     *     &lt;input name="inputTest" type="value"/>
+     *     &lt;div class="dataDisplay"
      *         data-display="
      *             {inputTest} is equal to 'testing';"
      *         data-display-resets="
      *             $this.css('display', 'none');">
-     *         <a>Test</a>
-     *     </div>
-     * </div>
+     *         &lt;a>Test&lt;/a>
+     *     &lt;/div>
+     * &lt;/div>
      *
-     * @example <caption>Basic JS initiation example:</caption>
+     * @example &lt;caption>Basic JS initiation example:&lt;/caption>
      * $(function() {
      *     $('#container').dataDisplay({...});
      * });
@@ -70,7 +111,7 @@
                         if (str == '(') {
                             str = str + '\"' + val + '\"' + ' !== \"\" ';
                         } else {
-                            str = str + ' && ' + '\"' + val + '\"' + ' !== \"\" ';
+                            str = str + ' &amp;&amp; ' + '\"' + val + '\"' + ' !== \"\" ';
                         }
                     });
                     str = str + ')';
@@ -86,7 +127,7 @@
                         if (str == '(') {
                             str = str + '\"' + val + '\"' + ' == \"\" ';
                         } else {
-                            str = str + ' && ' + '\"' + val + '\"' + ' == \"\" ';
+                            str = str + ' &amp;&amp; ' + '\"' + val + '\"' + ' == \"\" ';
                         }
                     });
                     str = str + ')';
@@ -116,7 +157,7 @@
             'is less than or equal to': { // or is optional
                 rgx: 'is\\sless\\sthan\\s(?:or\\s)?equal\\sto',
                 exec: function (field, ctx) {
-                    return '<=';
+                    return '&lt;=';
                 }
             },
             'is greater than': {
@@ -128,7 +169,7 @@
             'is less than': {
                 rgx: 'is\\sless\'sthan',
                 exec: function (field, ctx) {
-                    return '<';
+                    return '&lt;';
                 }
             },
             'is equal to': {
@@ -169,7 +210,7 @@
                     var instance = $(this).data(settingsArray.dataAttr, new DataDisplay(this, settingsArray, funcsArray));
                 } else {
                     // do option based functions
-                    if (typeof options !== 'undefined' && options == "destroy") {
+                    if (typeof options !== 'undefined' &amp;&amp; options == "destroy") {
                         // fully destroys the dataDisplay instance
                         var instance = this.data(settingsArray.dataAttr).destroy();
                     } else if (typeof options !== 'undefined') {
@@ -188,23 +229,23 @@
         });
 
         /**
-         * @fileOverview DataDisplay - A jQuery library that aids the developer in writing concise conditions against elements within a form based setting, in order to control the display of elements based on the state of the form. <br/><br/>
+         * @fileOverview DataDisplay - A jQuery library that aids the developer in writing concise conditions against elements within a form based setting, in order to control the display of elements based on the state of the form. &lt;br/>&lt;br/>
          *
          * new DataDisplay($el, settings, funcs)
          *
-         * @example <caption>Basic HTML syntax and structure example:</caption>
-         * <div id="container">
-         *     <input name="inputTest" type="value"/>
-         *     <div class="dataDisplay"
+         * @example &lt;caption>Basic HTML syntax and structure example:&lt;/caption>
+         * &lt;div id="container">
+         *     &lt;input name="inputTest" type="value"/>
+         *     &lt;div class="dataDisplay"
          *         data-display="
          *             {inputTest} is equal to 'testing';"
          *         data-display-resets="
          *             $this.css('display', 'none');">
-         *         <a>Test</a>
-         *     </div>
-         * </div>
+         *         &lt;a>Test&lt;/a>
+         *     &lt;/div>
+         * &lt;/div>
          *
-         * @example <caption>Basic JS initiation example:</caption>
+         * @example &lt;caption>Basic JS initiation example:&lt;/caption>
          * $(function() {
          *     $('#container').dataDisplay({...});
          * });
@@ -279,7 +320,7 @@
                             // construct a name to bind events to
                             var fireEvents = 'change' + that.settings.eventName + (that.settings.keyEventsFire ? ' keyup' + that.settings.eventName : '');
                             // for each field ensure we have a selector available and
-                            for (i = 0; i < conditionFields.length; i++) {
+                            for (i = 0; i &lt; conditionFields.length; i++) {
                                 // pull input field selector
                                 var field = conditionFields[i];
                                 var selector = that.getFieldSelector(field);
@@ -301,7 +342,7 @@
                                     applyConditions(e.data.conditions, e.data.conditionFields, e.data.el, e.data.context);
                                 });
                             }
-                            // remove resets & conditions attr and push to arr, restore on destroy -> this to ensure the doms clean. against inspect.
+                            // remove resets &amp; conditions attr and push to arr, restore on destroy -> this to ensure the doms clean. against inspect.
                             $this.attr(that.settings.resetsAttr, n)
                                  .attr(that.settings.condsAttr, n);
                             // apply defaults as defined in current context
@@ -327,7 +368,7 @@
             };
 
             /**
-             * this.debounce()<br/><br/>Only perform the provided function once over the given threshold timeframe
+             * this.debounce()&lt;br/>&lt;br/>Only perform the provided function once over the given threshold timeframe
              *
              * @function DataDisplay.debounce
              * @param {function} func the provided function we would like to call
@@ -350,7 +391,7 @@
                         if (!execAsap) func.apply(context, args);
                     };
                     // do we want to call the function now
-                    var callNow = execAsap && !timeout;
+                    var callNow = execAsap &amp;&amp; !timeout;
                     // clear the function if its already been called
                     clearTimeout(timeout);
                     // and set a timeout to call the delayed
@@ -361,7 +402,7 @@
             };
 
             /**
-             * this.findFields()<br/><br/>Find the fields defined across the entire condition
+             * this.findFields()&lt;br/>&lt;br/>Find the fields defined across the entire condition
              *
              * @function DataDisplay.findFields
              * @param {string} conditions the conditions defined against the element
@@ -381,7 +422,7 @@
             };
 
             /**
-             * this.getFieldSelector()<br/><br/>Return a string selector which assumes field relates to a name, eg [name*="..."]
+             * this.getFieldSelector()&lt;br/>&lt;br/>Return a string selector which assumes field relates to a name, eg [name*="..."]
              *
              * @function DataDisplay.getFieldSelector
              * @param {string} field the field we want a selector for
@@ -394,7 +435,7 @@
             };
 
             /**
-             * this.escapeRegExp()<br/><br/>Return a string which has been appropriately escaped ready for a regex expression
+             * this.escapeRegExp()&lt;br/>&lt;br/>Return a string which has been appropriately escaped ready for a regex expression
              *
              * @function DataDisplay.escapeRegExp
              * @param {string} str the string we want to clean
@@ -403,11 +444,11 @@
              */
             dataDisplay.escapeRegExp = function (str) {
                 // escape the given string, allow special chars to safely appear in regex expression
-                return str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");
+                return str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&amp;");
             };
 
             /**
-             * this.applyResets()<br/><br/>Apply the defaults as defined against the el
+             * this.applyResets()&lt;br/>&lt;br/>Apply the defaults as defined against the el
              *
              * @function DataDisplay.applyResets
              * @param {string} resets the reset statements defined against the element
@@ -428,7 +469,7 @@
             };
 
             /**
-             * this.applyConditions()<br/><br/>Apply the conditions as provided by the el
+             * this.applyConditions()&lt;br/>&lt;br/>Apply the conditions as provided by the el
              *
              * @function DataDisplay.applyConditions
              * @param {string} conditions the conditions defined against the element
@@ -454,14 +495,14 @@
                 // allow for multiple side-effects in single conditions
                 // ... data-display="
                 //  {val} > 0; ||
-                //  {val} < 1 :: $(var).css('background','#bdbdbd'); ||
-                //  {val} > 1 && {val} < 2 :: $(var).css('background','#bdbdbd');
+                //  {val} &lt; 1 :: $(var).css('background','#bdbdbd'); ||
+                //  {val} > 1 &amp;&amp; {val} &lt; 2 :: $(var).css('background','#bdbdbd');
                 // " ...
                 conditions = conditions.replace(/\s\s+/g, ' ');
                 // split the conditions into its collective parts
                 var conditionalParts = conditions.split("; ||");
                 // for each part of the conditions, check the condition
-                for (var i = 0; i < conditionalParts.length; i++) {
+                for (var i = 0; i &lt; conditionalParts.length; i++) {
                     // check for the presents of a "::" this indicates that anything following the dash should be used instead of show/hide,
                     // each statement (seperated by ';') must have only one side-effect. This is enforced via the splitting of '::' and ';'
                     var conditionalPartsSplit = conditionalParts[i].split("::");
@@ -477,7 +518,7 @@
             };
 
             /**
-             * this.replaceFieldValHolders()<br/><br/>Replace a {variable} field in a condition
+             * this.replaceFieldValHolders()&lt;br/>&lt;br/>Replace a {variable} field in a condition
              *
              * @function DataDisplay.replaceFieldValHolders
              * @param {string} condition the condition being considered
@@ -490,7 +531,7 @@
                 // ensure the fields are presented as an array
                 fields = (typeof fields == "string" ? [fields] : fields);
                 // for each field in the conditions string, replace its {var} with its value
-                for (i = 0; i < fields.length; i++) {
+                for (i = 0; i &lt; fields.length; i++) {
                     // grab the field selector
                     var field = fields[i];
                     // get a selector for the given field
@@ -521,7 +562,7 @@
             };
 
             /**
-             * this.showOnCondition()<br/><br/>Show the el based on condition
+             * this.showOnCondition()&lt;br/>&lt;br/>Show the el based on condition
              *
              * @function DataDisplay.showOnCondition
              * @param {string} condition the condition being considered
@@ -541,7 +582,7 @@
             };
 
             /**
-             * this.funcOnCondition()<br/><br/>Show the el based on condition and associated functions
+             * this.funcOnCondition()&lt;br/>&lt;br/>Show the el based on condition and associated functions
              *
              * @function DataDisplay.funcOnCondition
              * @param {array} conditionalParts a two part construct spliting the condition from the resolution funcs
@@ -550,14 +591,14 @@
              */
             dataDisplay.funcOnCondition = function (conditionalParts, el) {
                 // carry out the single action as defined against the condition
-                for (var i = 0; i < conditionalParts.length; i++) {
+                for (var i = 0; i &lt; conditionalParts.length; i++) {
                     // strip final ';' from string before invoking
                     var condition = "return (" + conditionalParts[0] + ");";
                     // when the part isnt the condition we trigger the datafunc
                     if (i > 0) {
                         var conditionalPartsSplit = conditionalParts[i].split(";");
                         // carry out the work defined in each conditional statement
-                        for (var j = 0; j < conditionalPartsSplit.length; j++) {
+                        for (var j = 0; j &lt; conditionalPartsSplit.length; j++) {
                             // when the condition is satisified build and trigger the func
                             if (new Function(condition)() == true) {
                                 // default action is to show the element - implied so that it may be fully ommitted from the condition
@@ -575,7 +616,7 @@
             };
 
             /**
-             * this.destroy()<br/><br/>Destroy the conditions and restore the originial state
+             * this.destroy()&lt;br/>&lt;br/>Destroy the conditions and restore the originial state
              *
              * @function DataDisplay.destroy
              * @return {object} return this to allow for the base instance to be kept and removed manually
@@ -603,7 +644,7 @@
                         // when there are fields we need to unbind the event watchers
                         if (conditionFields.length == 0) return;
                         // for each field unbind any dataDisplay events
-                        for (i = 0; i < conditionFields.length; i++) {
+                        for (i = 0; i &lt; conditionFields.length; i++) {
                             var field = conditionFields[i];
                             var selector = that.getFieldSelector(field);
                             $(selector, $ctx).off(that.settings.eventName);
@@ -626,3 +667,23 @@
         };
     }
 ));
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<br class="clear">
+
+<footer align="center">
+    Generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.3</a> on Tue Jul 18 2017 21:51:18 GMT+0100 (BST) using the Minami theme.
+     <br/> Copyright © 2014-2017 Graham Dixon, MML LTD - Assetinfo.</a>
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/linenumber.js"></script>
+</body>
+</html>
