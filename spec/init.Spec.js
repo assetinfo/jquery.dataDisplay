@@ -1,7 +1,7 @@
 describe("Initialise a dataDisplay div with a single condition (based on the state of a text input).", function() {
     beforeEach(function() {
         // append the basic element and coditions to the body
-        $('body').append('<div id="container"><input name="inputTest" type="value"/><div class="dataDisplay" data-display="{inputTest} == \'testing\' :: $this.show();" data-display-resets="$this.css(\'display\', \'none\');"><a>Test</a></div></div>');
+        $('body').append('<div id="container"><input name="inputTest" type="value"/><div class="dataDisplay" data-display="{inputTest} == \'testing\' :: $this.show();"><a>Test</a></div></div>');
         // initiate against the #container element
         $('#container').dataDisplay();
     });

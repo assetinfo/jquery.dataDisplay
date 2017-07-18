@@ -28,7 +28,6 @@
                     {inputTest} is equal to 'testinggg' :: $this.css('color','yellow');$this.css('border','1px solid yellow');"
                 data-display-resets="
                     $this.css('color', 'black');
-                    $this.css('display', 'none');
                     $this.css('font-size', '16px');
                     $this.css('background', '#fff');
                     $this.css('border', '1px solid #000');">
@@ -37,17 +36,18 @@
             </div>
             <div class="dataDisplay"
                 data-display="
-                    {radioTest} == 'no';"
-                data-display-resets="
-                    $this.css('display', 'none');">
+                    {radioTest} == 'no';">
                 <a>select the 'yes' radio field above</a>
             </div>
         </div>
         <script type='text/javascript'>
             $(function() {
-
+                /*!
+                 * basic example
+                 * - initiates jquery.dataDisplay.js instance against #container
+                 * - conditions defined agaist attributes in the HTML
+                 */
                 $('#container').dataDisplay();
-
             });
         </script>
     </body>

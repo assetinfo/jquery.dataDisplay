@@ -1,6 +1,6 @@
 /*! 
  * Script: jQuery.dataDisplay.js 
- * Description: jquery.dataDisplay aids the developer in writing concise conditions against elements within a form based setting, in order to control the display of elements based on the state of a form.  
+ * Description: A jQuery plugin that aids the developer in writing concise conditions against elements within a form based setting, in order to control the display of elements based on the state of a form.  
  * Copyright: Copyright (c) 2014-2017 Graham Dixon - http://gdixon.co.uk/  
  * Author: GDixon  
  * Email: gdixon@assetinfo.co.uk  

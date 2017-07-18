@@ -18,7 +18,7 @@
     }
 }(
     /**
-     * @fileOverview $.fn.dataDisplay - A jQuery library that aids the developer in writing concise conditions against elements within a form based setting, in order to control the display of elements based on the state of the form.
+     * @fileOverview $.fn.dataDisplay - A jQuery plugin that aids the developer in writing concise conditions against elements within a form based setting, in order to control the display of elements based on the state of the form.
      *
      * @example <caption>Basic HTML syntax and structure example:</caption>
      * <div id="container">
@@ -188,7 +188,7 @@
         });
 
         /**
-         * @fileOverview DataDisplay - A jQuery library that aids the developer in writing concise conditions against elements within a form based setting, in order to control the display of elements based on the state of the form. <br/><br/>
+         * @fileOverview DataDisplay - A jQuery plugin that aids the developer in writing concise conditions against elements within a form based setting, in order to control the display of elements based on the state of the form. <br/><br/>
          *
          * new DataDisplay($el, settings, funcs)
          *
