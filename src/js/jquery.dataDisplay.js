@@ -151,8 +151,6 @@
          * @param {string} options.initFire should the plugin fire during the setup phase?
          * @param {string} options.keyEventsFire should the plugin fire on key events?
          *
-         * @version 0.0.1
-         * @author Graham Dixon - gdixon@assetinfo.co.uk
          * @alias dataDisplay
          * @memberof! $.fn.dataDisplay
          */
