@@ -97,32 +97,35 @@
                     var $this = $(this), conditions = $this.attr(that.settings.condsAttr);
                     if (isNaN(conditions)) {
                         void 0 === that.conditions && (that.conditions = []);
-                        var applyDefaults = that.debounce(function(el) {
-                            return that.applyDefaults(el);
+                        var applyDefaults = that.debounce(function(resets, fields, el, $ctx) {
+                            return that.applyDefaults(resets, fields, el, $ctx);
                         }), applyConditions = that.debounce(function(conditions, fields, el, $ctx) {
                             return that.applyConditions(conditions, fields, el, $ctx);
-                        }), styles = void 0 !== $this.attr("style") ? $this.attr("style") : "", resets = void 0 !== $this.attr(that.settings.resetsAttr) ? $this.attr(that.settings.resetsAttr) : "", n = that.conditions.length;
-                        that.conditions[n] = {
-                            this: $this,
-                            resets: resets,
-                            styles: styles,
-                            conditions: conditions
-                        }, $this.attr(that.settings.condsAttr, n);
-                        $this.attr("name");
-                        var fields = that.findFields(conditions), fireEvents = "change" + that.settings.eventName + (that.settings.keyEventsFire ? " keyup" + that.settings.eventName : "");
-                        for (i = 0; i < fields.length; i++) {
-                            if (0 == $(that.getFieldSelector(fields[i]), $ctx).length) return;
-                            var field = fields[i], selector = that.getFieldSelector(field);
+                        }), styles = void 0 !== $this.attr("style") ? $this.attr("style") : "", resets = void 0 !== $this.attr(that.settings.resetsAttr) ? $this.attr(that.settings.resetsAttr) : "", resetFields = that.findFields(resets), conditionFields = that.findFields(conditions), n = that.conditions.length, fireEvents = "change" + that.settings.eventName + (that.settings.keyEventsFire ? " keyup" + that.settings.eventName : "");
+                        for (i = 0; i < conditionFields.length; i++) {
+                            var field = conditionFields[i], selector = that.getFieldSelector(field);
+                            if (0 == $(selector, $ctx).length) return;
                             $(selector, $ctx).on(fireEvents, {
                                 el: $this,
                                 context: $ctx,
+                                resets: resets,
+                                resetFields: resetFields,
                                 conditions: conditions,
-                                conditionFields: fields
+                                conditionFields: conditionFields
                             }, function(e) {
-                                applyDefaults(e.data.el), applyConditions(e.data.conditions, e.data.conditionFields, e.data.el, e.data.context);
+                                applyDefaults(e.data.resets, e.data.resetFields, e.data.el, e.data.context), applyConditions(e.data.conditions, e.data.conditionFields, e.data.el, e.data.context);
                             });
                         }
-                        that.applyDefaults($this), that.settings.initFire && applyConditions(conditions, fields, $this, $ctx);
+                        $this.attr(that.settings.resetsAttr, n).attr(that.settings.condsAttr, n), that.applyDefaults(resets, resetFields, $this, $ctx), 
+                        that.settings.initFire && applyConditions(conditions, conditionFields, $this, $ctx), 
+                        that.conditions[n] = {
+                            this: $this,
+                            styles: styles,
+                            resets: resets,
+                            resetFields: resetFields,
+                            conditions: conditions,
+                            conditionFields: resetFields
+                        };
                     }
                 });
             }), that;
@@ -141,34 +144,26 @@
             return '[name*="' + field + '"]';
         }, dataDisplay.escapeRegExp = function(str) {
             return str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");
-        }, dataDisplay.searchArray = function(array, value) {
-            for (var key in array) if (array[key] == value) return key;
-            return -1;
-        }, dataDisplay.applyDefaults = function(el) {
-            if ($(el).hide(), isNaN($(el).attr(this.settings.resetsAttr))) {
-                resets = $(el).attr(this.settings.resetsAttr);
-                $(el).attr(this.settings.resetsAttr, $(el).attr(this.settings.condsAttr));
-            } else var resets = this.conditions[$(el).attr(this.settings.condsAttr)].resets;
-            new Function("$this", resets || "")(el);
+        }, dataDisplay.applyDefaults = function(resets, fields, el, $ctx) {
+            $(el, $ctx).hide(), resets = this.replaceFieldValHolders(resets, fields), new Function("$this", resets || "")(el);
         }, dataDisplay.applyConditions = function(conditions, fields, el, $ctx) {
             var that = this;
-            field = "", fieldSelector = "", fieldValue = "", parseVal = "", conditionalParts = [], 
-            conditionalPartsSplit = [];
             for (func in that.funcs) for (var f = that.funcs[func], r = new RegExp(f.rgx, "gi"); null != (m = r.exec(conditions)); ) {
                 var v = f.exec(m[1], $ctx);
                 conditions = conditions.replace(new RegExp(f.rgx), v);
             }
-            if ("string" == typeof fields) fieldSelector = that.getFieldSelector(fields), conditions = that.replaceFieldInCondition(fieldSelector, fields, conditions); else for (i = 0; i < fields.length; i++) field = fields[i], 
-            fieldSelector = that.getFieldSelector(field), conditions = that.replaceFieldInCondition(fieldSelector, field, conditions);
-            for (var conditionalParts = (conditions = conditions.replace(/\s\s+/g, " ")).split("; ||"), i = 0; i < conditionalParts.length; i++) {
+            for (var conditionalParts = (conditions = (conditions = that.replaceFieldValHolders(conditions, fields)).replace(/\s\s+/g, " ")).split("; ||"), i = 0; i < conditionalParts.length; i++) {
                 var conditionalPartsSplit = conditionalParts[i].split("::");
                 1 == conditionalPartsSplit.length ? that.showOnCondition(conditionalParts[i], el) : that.funcOnCondition(conditionalPartsSplit, el);
             }
-        }, dataDisplay.replaceFieldInCondition = function(fieldSelector, field, conditions) {
-            var that = this, fieldValue = "", parseVal = "";
-            return void 0 !== (fieldValue = void 0 !== $(fieldSelector + ":checked").val() ? $(fieldSelector + ":checked").val() : $(fieldSelector).val()) && (parseVal = 1 == isNaN(fieldValue) ? '"' + encodeURIComponent(fieldValue) + '"' : parseFloat(fieldValue), 
-            conditions = conditions.replace(new RegExp("{" + that.escapeRegExp(field) + "}", "g"), parseVal)), 
-            conditions;
+        }, dataDisplay.replaceFieldValHolders = function(conditions, fields) {
+            var that = this;
+            for (fields = "string" == typeof fields ? [ fields ] : fields, i = 0; i < fields.length; i++) {
+                var field = fields[i], fieldSelector = that.getFieldSelector(field), fieldValue = "", parseVal = "";
+                void 0 !== (fieldValue = void 0 !== $(fieldSelector + ":checked").val() ? $(fieldSelector + ":checked").val() : $(fieldSelector).val()) && (parseVal = 1 == isNaN(fieldValue) ? '"' + encodeURIComponent(fieldValue) + '"' : parseFloat(fieldValue), 
+                conditions = conditions.replace(new RegExp("{" + that.escapeRegExp(field) + "}", "g"), parseVal));
+            }
+            return conditions;
         }, dataDisplay.showOnCondition = function(conditions, el) {
             var condition = "return (" + (conditions = conditions.replace(/;(\s+)?$/, "")) + ");";
             1 == new Function(condition)() && $(el).show();
@@ -186,10 +181,10 @@
             return $(that.el).each(function() {
                 var $ctx = $(this);
                 $("[" + that.settings.condsAttr + "]", $ctx).each(function() {
-                    var $this = $(this), n = $this.attr(that.settings.condsAttr), styles = that.conditions[n].styles, resets = that.conditions[n].resets, conditions = that.conditions[n].conditions, fields = that.findFields(conditions);
-                    if (0 != fields.length) {
-                        for (i = 0; i < fields.length; i++) {
-                            var field = fields[i], selector = that.getFieldSelector(field);
+                    var $this = $(this), n = $this.attr(that.settings.condsAttr), styles = that.conditions[n].styles, resets = that.conditions[n].resets, conditions = that.conditions[n].conditions, conditionFields = that.findFields(conditions);
+                    if (0 != conditionFields.length) {
+                        for (i = 0; i < conditionFields.length; i++) {
+                            var field = conditionFields[i], selector = that.getFieldSelector(field);
                             $(selector, $ctx).off(that.settings.eventName);
                         }
                         $this.attr("style", styles).attr(that.settings.condsAttr, conditions).attr(that.settings.resetsAttr, resets);

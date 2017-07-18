@@ -258,8 +258,8 @@
                                 that.conditions = [];
                             }
                             // apply the default state
-                            var applyDefaults = that.debounce(function (el) {
-                                return that.applyDefaults(el);
+                            var applyDefaults = that.debounce(function (resets, fields, el, $ctx) {
+                                return that.applyDefaults(resets, fields, el, $ctx);
                             });
                             // apply the main debounce logic
                             var applyConditions = that.debounce(function (conditions, fields, el, $ctx) {
@@ -269,50 +269,55 @@
                             var styles = (typeof $this.attr("style") !== 'undefined' ? $this.attr("style") : '');
                             // backup the resets for the given elm
                             var resets = (typeof $this.attr(that.settings.resetsAttr) !== 'undefined' ? $this.attr(that.settings.resetsAttr) : '');
+                            // find the fields that the reset conditions might use
+                            var resetFields = that.findFields(resets);
+                            // find fields that these conditions will affect/use
+                            var conditionFields = that.findFields(conditions);
                             // n is the current position in the conditions array
                             var n = that.conditions.length;
-                            // apply the context to the conditions array
-                            that.conditions[n] = {
-                                "this": $this,
-                                "resets": resets,
-                                "styles": styles,
-                                "conditions": conditions
-                            };
-                            // remove attr and push to arr - restore on destroy -> this to ensure the doms clean. against inspect.
-                            $this.attr(that.settings.condsAttr, n);
-                            // discover the elms name
-                            var name = $this.attr('name');
-                            // find the resultant fields that these conditions will affect
-                            var fields = that.findFields(conditions);
                             // construct a name to bind events to
                             var fireEvents = 'change' + that.settings.eventName + (that.settings.keyEventsFire ? ' keyup' + that.settings.eventName : '');
                             // for each field ensure we have a selector available and
-                            for (i = 0; i < fields.length; i++) {
-                                // end early on missing selector
-                                if ($(that.getFieldSelector(fields[i]), $ctx).length == 0)
-                                    return;
+                            for (i = 0; i < conditionFields.length; i++) {
                                 // pull input field selector
-                                var field = fields[i];
+                                var field = conditionFields[i];
                                 var selector = that.getFieldSelector(field);
+                                // end early on missing selector
+                                if ($(selector, $ctx).length == 0)
+                                    return;
                                 // using discovered selector bind the discovered events
                                 $(selector, $ctx).on(fireEvents, {
                                     el: $this,
                                     context: $ctx,
+                                    resets: resets,
+                                    resetFields: resetFields,
                                     conditions: conditions,
-                                    conditionFields: fields
+                                    conditionFields: conditionFields
                                 }, function (e) {
                                     // apply the default conditions
-                                    applyDefaults(e.data.el);
+                                    applyDefaults(e.data.resets, e.data.resetFields, e.data.el, e.data.context);
                                     // before applying the conditionally displayed rules
                                     applyConditions(e.data.conditions, e.data.conditionFields, e.data.el, e.data.context);
                                 });
                             }
+                            // remove resets & conditions attr and push to arr, restore on destroy -> this to ensure the doms clean. against inspect.
+                            $this.attr(that.settings.resetsAttr, n)
+                                 .attr(that.settings.condsAttr, n);
                             // apply defaults as defined in current context
-                            that.applyDefaults($this);
+                            that.applyDefaults(resets, resetFields, $this, $ctx);
                             // fire the conditions once onload -- useful for when we have a complete data set
                             if (that.settings.initFire) {
-                                applyConditions(conditions, fields, $this, $ctx);
+                                applyConditions(conditions, conditionFields, $this, $ctx);
                             }
+                            // apply the context to the conditions array for restoration on destroy
+                            that.conditions[n] = {
+                                "this": $this,
+                                "styles": styles,
+                                "resets": resets,
+                                "resetFields": resetFields,
+                                "conditions": conditions,
+                                "conditionFields": resetFields
+                            };
                         }
                     });
                 });
@@ -331,17 +336,25 @@
              * @memberOf DataDisplay
              */
             dataDisplay.debounce = function (func, threshold, execAsap) {
+                // timeout appears scope above the calling function to allow the calling function to clear itself
                 var timeout;
+                // return a function which will call the given function as a delayed timeout (delayed according to threshold)
                 return function () {
+                    // save the context
                     var context = this;
                     var args = arguments;
+                    // delay the actual function
                     var delayed = function () {
                         timeout = null;
                         if (!execAsap) func.apply(context, args);
                     };
+                    // do we want to call the function now
                     var callNow = execAsap && !timeout;
+                    // clear the function if its already been called
                     clearTimeout(timeout);
+                    // and set a timeout to call the delayed
                     timeout = setTimeout(delayed, threshold);
+                    // if we do want to call now, then do it
                     if (callNow) func.apply(context, args);
                 };
             };
@@ -355,7 +368,9 @@
              * @memberOf DataDisplay
              */
             dataDisplay.findFields = function (conditions) {
+                // find all the {fields} used in the given conditions (String)
                 var fields = [];
+                // simple regex pattern to patch anything between {}
                 var r = /{([^}]+)}/gi;
                 // find the fields defined in the conditions
                 while ((m = r.exec(conditions)) != null) {
@@ -373,6 +388,7 @@
              * @memberOf DataDisplay
              */
             dataDisplay.getFieldSelector = function (field) {
+                // return the provided field name wrapped in a name selctor
                 return '[name*="' + field + '"]';
             };
 
@@ -385,47 +401,25 @@
              * @memberOf DataDisplay
              */
             dataDisplay.escapeRegExp = function (str) {
+                // escape the given string, allow special chars to safely appear in regex expression
                 return str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");
-            };
-
-            /**
-             * this.searchFor()<br/><br/>Search for a needle in a haystack
-             *
-             * @function DataDisplay.searchFor
-             * @param {array} array the haystack we are searching
-             * @param {string} value the needle to search for
-             * @return {int} the needles index in the haystack
-             * @memberOf DataDisplay
-             */
-            dataDisplay.searchArray = function (array, value) {
-                for (var key in array) {
-                    if (array[key] == value) {
-                        return key;
-                    }
-                }
-                return -1;
             };
 
             /**
              * this.applyDefaults()<br/><br/>Apply the defaults as defined against the el
              *
              * @function DataDisplay.applyDefaults
+             * @param {string} resets the reset statements defined against the element
+             * @param {array} fields an array of all {variables} defined in the conditions string
              * @param {object} el the element we are applying defaluts for
+             * @param {object} ctx the outer element we can use as context
              * @memberOf DataDisplay
              */
-            dataDisplay.applyDefaults = function (el) {
+            dataDisplay.applyDefaults = function (resets, fields, el, $ctx) {
                 // default action is to hide the element
-                $(el).hide();
-                // pull the resets from the attr
-                if (isNaN($(el).attr(this.settings.resetsAttr))) {
-                    // pull from the dom element on first load
-                    var resets = $(el).attr(this.settings.resetsAttr);
-                    // apply the same holder to the resets
-                    $(el).attr(this.settings.resetsAttr, $(el).attr(this.settings.condsAttr));
-                } else {
-                    // pull resets from the dataDisplay obj
-                    var resets = this.conditions[$(el).attr(this.settings.condsAttr)]['resets'];
-                }
+                $(el, $ctx).hide();
+                // for each field present in the conditions, replace its {var} with its value
+                resets = this.replaceFieldValHolders(resets, fields);
                 // apply resets as js functions against given el
                 var resolve = new Function('$this', (resets ? resets : ''));
                 // trigger with the given el
@@ -437,19 +431,14 @@
              *
              * @function DataDisplay.applyConditions
              * @param {string} conditions the conditions defined against the element
-             * @param {array} fields an array of all {variables} defined in the confitions string
+             * @param {array} fields an array of all {variables} defined in the conditions string
              * @param {object} el the element we are applying defaluts for
              * @param {object} ctx the outer element we can use as context
              * @memberOf DataDisplay
              */
             dataDisplay.applyConditions = function (conditions, fields, el, $ctx) {
+                // hold outer ctx;
                 var that = this;
-                    field = '',
-                    fieldSelector = '',
-                    fieldValue = '',
-                    parseVal = '',
-                    conditionalParts = [],
-                    conditionalPartsSplit = [];
                 // check for predefined functions by syntax (!empty, empty, length)
                 for (func in that.funcs) {
                     var f = that.funcs[func];
@@ -460,17 +449,7 @@
                     }
                 }
                 // for each field present in the conditions, replace its {var} with its value
-                if (typeof fields == "string") {
-                    fieldSelector = that.getFieldSelector(fields);
-                    conditions = that.replaceFieldInCondition(fieldSelector, fields, conditions);
-                } else {
-                    // for each field present in the conditions, replace its {var} with its value
-                    for (i = 0; i < fields.length; i++) {
-                        field = fields[i];
-                        fieldSelector = that.getFieldSelector(field);
-                        conditions = that.replaceFieldInCondition(fieldSelector, field, conditions);
-                    }
-                }
+                conditions = that.replaceFieldValHolders(conditions, fields);
                 // allow for multiple side-effects in single conditions
                 // ... data-display="
                 //  {val} > 0; ||
@@ -497,37 +476,46 @@
             };
 
             /**
-             * this.replaceFieldInCondition()<br/><br/>Replace a {variable} field in a condition
+             * this.replaceFieldValHolders()<br/><br/>Replace a {variable} field in a condition
              *
-             * @function DataDisplay.replaceFieldInCondition
-             * @param {string} fieldSelector the selector that matches the given field
-             * @param {string} field the field being considered
+             * @function DataDisplay.replaceFieldValHolders
              * @param {string} condition the condition being considered
+             * @param {string} fields the fields being replaced
              * @memberOf DataDisplay
              */
-            dataDisplay.replaceFieldInCondition = function (fieldSelector, field, conditions) {
+            dataDisplay.replaceFieldValHolders = function (conditions, fields) {
+                // hold outer ctx;
                 var that = this;
-                // replace the given field with the value of the fieldSelector in the conditions
-                var fieldValue = '';
-                var parseVal = '';
-                // check that the given field has a value
-                if (typeof $(fieldSelector + ':checked').val() !== "undefined") {
-                    // first check for radio/checkbox - failover to inputs
-                    fieldValue = $(fieldSelector + ':checked').val();
-                } else {
-                    fieldValue = $(fieldSelector).val();
-                }
-                // when value is present replace {var}
-                if (typeof fieldValue !== 'undefined') {
-                    if (isNaN(fieldValue) == true) {
-                        parseVal = '\"' + encodeURIComponent(fieldValue) + '\"';
+                // ensure the fields are presented as an array
+                fields = (typeof fields == "string" ? [fields] : fields);
+                // for each field in the conditions string, replace its {var} with its value
+                for (i = 0; i < fields.length; i++) {
+                    // grab the field selector
+                    var field = fields[i];
+                    // get a selector for the given field
+                    var fieldSelector = that.getFieldSelector(field);
+                    // replace the given field with the value of the fieldSelector in the conditions
+                    var fieldValue = '';
+                    var parseVal = '';
+                    // check that the given field has a value
+                    if (typeof $(fieldSelector + ':checked').val() !== "undefined") {
+                        // first check for radio/checkbox - failover to inputs
+                        fieldValue = $(fieldSelector + ':checked').val();
                     } else {
-                        parseVal = parseFloat(fieldValue);
+                        fieldValue = $(fieldSelector).val();
                     }
-                    // replace the {} var place holder with real safely encoded value
-                    conditions = conditions.replace(new RegExp('{' + that.escapeRegExp(field) + '}', 'g'), parseVal);
+                    // when value is present replace {var}
+                    if (typeof fieldValue !== 'undefined') {
+                        if (isNaN(fieldValue) == true) {
+                            parseVal = '\"' + encodeURIComponent(fieldValue) + '\"';
+                        } else {
+                            parseVal = parseFloat(fieldValue);
+                        }
+                        // replace the {} var place holder with real safely encoded value
+                        conditions = conditions.replace(new RegExp('{' + that.escapeRegExp(field) + '}', 'g'), parseVal);
+                    }
                 }
-                // field had been replaced throughout the entire condition list
+                // fields have been replaced throughout the entire condition list with their respective values
                 return conditions;
             };
 
@@ -544,7 +532,9 @@
                 var conditions = conditions.replace(/;(\s+)?$/, '');
                 // check the condition and show/hide the el
                 var condition = "return (" + conditions + ");";
+                // execute the condition and if true display the element
                 if (new Function(condition)() == true) {
+                    // show the given element
                     $(el).show();
                 }
             };
@@ -608,12 +598,12 @@
                         var resets = that.conditions[n]['resets'];
                         var conditions = that.conditions[n]['conditions'];
                         // the fields involved in any discovered conditions
-                        var fields = that.findFields(conditions);
+                        var conditionFields = that.findFields(conditions);
                         // when there are fields we need to unbind the event watchers
-                        if (fields.length == 0) return;
+                        if (conditionFields.length == 0) return;
                         // for each field unbind any dataDisplay events
-                        for (i = 0; i < fields.length; i++) {
-                            var field = fields[i];
+                        for (i = 0; i < conditionFields.length; i++) {
+                            var field = conditionFields[i];
                             var selector = that.getFieldSelector(field);
                             $(selector, $ctx).off(that.settings.eventName);
                         }
