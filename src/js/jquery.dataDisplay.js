@@ -39,7 +39,7 @@
      *
      * @version 0.0.1
      * @author Graham Dixon - gdixon@assetinfo.co.uk
-     * @namespace $.fn.DataDisplay
+     * @namespace $.fn.dataDisplay
      * @memberOf! $.fn
      */
     function ($) {
@@ -152,7 +152,7 @@
          *
          * @version 0.0.1
          * @author Graham Dixon - gdixon@assetinfo.co.uk
-         * @memberOf $.fn.DataDisplay
+         * @memberOf $.fn.dataDisplay
          */
         $.fn.dataDisplay = (function (options) {
             // the options must be passed to the init func as an array - convert any strings
@@ -212,7 +212,7 @@
          * @version 0.0.1
          * @author Graham Dixon - gdixon@assetinfo.co.uk
          * @class DataDisplay
-         * @memberof $.fn.dataDisplay
+         * @memberOf $.fn.dataDisplay
          */
         var DataDisplay = function (el, settings, funcs) {
             // assign internal scope to local obj

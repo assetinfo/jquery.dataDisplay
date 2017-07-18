@@ -53,7 +53,7 @@
 
 ## Documentation
 
-* [jquery.dataDisplay's documentation](https://assetinfo.github.io/jquery.dataDisplay/docs/jquery.dataDisplay.html) has been generated using [jsDocs 3.5.3](https://github.com/jsdoc3/jsdoc)
+* [jquery.dataDisplay's documentation](https://assetinfo.github.io/jquery.dataDisplay/docs/$.fn.dataDisplay.html) has been generated using [jsDocs 3.5.3](https://github.com/jsdoc3/jsdoc)
 
 ## Installing, building and testing
 
