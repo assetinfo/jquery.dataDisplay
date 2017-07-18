@@ -11,7 +11,7 @@
     "grunt-contrib-requirejs": "1.0.0",
     "grunt-contrib-uglify": "3.0.1",
     "grunt-jsdoc": "2.1.0",
-    "minami": "1.2.3"
+    "minami": "https://github.com/gdixon/minami/tarball/master"
   },
   "scripts": {
     "test": "grunt test"
