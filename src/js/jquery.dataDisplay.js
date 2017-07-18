@@ -40,7 +40,7 @@
      * @version 0.0.1
      * @author Graham Dixon - gdixon@assetinfo.co.uk
      * @namespace $.fn.dataDisplay
-     * @memberOf! $.fn
+     * @memberof! $.fn
      */
     function ($) {
         // defaults to align the dataDisplay instance with the dom situation
@@ -143,16 +143,18 @@
          * $.fn.dataDisplay - Invokes methods against a DataDisplay instance bound to the $el
          *
          * @param {object} options the settings being applied to this $el
-         * @param {string} options.eventName - name to bind the events against
-         * @param {string} options.dataAttr - bind DataDisplay instance to data attribute
-         * @param {string} options.condsAttr - main attribute holding the conditions on first-load
-         * @param {string} options.resetsAttr - attribute holding resets (defined as jquery statements against $this)
-         * @param {string} options.initFire - should the plugin fire during the setup phase?
-         * @param {string} options.keyEventsFire - should the plugin fire on key events?
+         * @param {array}  options.funcs provide an array of func methods to extend the built-in helper methods
+         * @param {string} options.eventName name to bind the events against
+         * @param {string} options.dataAttr bind DataDisplay instance to data attribute
+         * @param {string} options.condsAttr main attribute holding the conditions on first-load
+         * @param {string} options.resetsAttr attribute holding resets (defined as jquery statements against $this)
+         * @param {string} options.initFire should the plugin fire during the setup phase?
+         * @param {string} options.keyEventsFire should the plugin fire on key events?
          *
          * @version 0.0.1
          * @author Graham Dixon - gdixon@assetinfo.co.uk
-         * @memberOf $.fn.dataDisplay
+         * @alias dataDisplay
+         * @memberof! $.fn.dataDisplay
          */
         $.fn.dataDisplay = (function (options) {
             // the options must be passed to the init func as an array - convert any strings
@@ -212,27 +214,28 @@
          * @version 0.0.1
          * @author Graham Dixon - gdixon@assetinfo.co.uk
          * @class DataDisplay
-         * @memberOf $.fn.dataDisplay
+         * @memberof $.fn.dataDisplay
          */
         var DataDisplay = function (el, settings, funcs) {
             // assign internal scope to local obj
             var dataDisplay = this;
 
             /**
-             * $.fn.dataDisplay - initiates dataDisplay on the given element with the given settings and funcs
+             * Initiate dataDisplay on the given element with the given settings and funcs
              *
              * @function DataDisplay.init
              * @param {object} el the element that DataDisplay is being applied to
              * @param {object} settings the settings being applied to this $el
-             * @param {string} settings.eventName - name to bind the events against
-             * @param {string} settings.dataAttr - bind DataDisplay instance to data attribute
-             * @param {string} settings.condsAttr - main attribute holding the conditions on first-load
-             * @param {string} settings.resetsAttr - attribute holding resets (defined as jquery statements against $this)
-             * @param {string} settings.initFire - should the plugin fire during the setup phase?
-             * @param {string} settings.keyEventsFire - cshould the plugin fire on key events?
+             * @param {array}  settings.funcs provide an array of func methods to extend the built-in helper methods
+             * @param {string} settings.eventName name to bind the events against
+             * @param {string} settings.dataAttr bind DataDisplay instance to data attribute
+             * @param {string} settings.condsAttr main attribute holding the conditions on first-load
+             * @param {string} settings.resetsAttr attribute holding resets (defined as jquery statements against $this)
+             * @param {string} settings.initFire should the plugin fire during the setup phase?
+             * @param {string} settings.keyEventsFire cshould the plugin fire on key events?
              * @param {object} funcs the funcs being supplied as helpers to build out conditions in a congruent manner
              *
-             * @memberOf! DataDisplay
+             * @memberof! DataDisplay
              */
             dataDisplay.init = function (el, settings, funcs) {
                 // associate properties the outer calling scope
@@ -333,7 +336,7 @@
              * @param {int}  threshold for how long should we supress calling the function?
              * @param {bool}  execAsap execute the function on first load, then again after threshold
              * @return {function} calling the returned function n* over a timeframe shorter than threshold will result in one invokation
-             * @memberOf DataDisplay
+             * @memberof DataDisplay
              */
             dataDisplay.debounce = function (func, threshold, execAsap) {
                 // timeout appears scope above the calling function to allow the calling function to clear itself
@@ -365,7 +368,7 @@
              * @function DataDisplay.findFields
              * @param {string} conditions the conditions defined against the element
              * @return {array} an array of all {variables} defined in the confitions string
-             * @memberOf DataDisplay
+             * @memberof DataDisplay
              */
             dataDisplay.findFields = function (conditions) {
                 // find all the {fields} used in the given conditions (String)
@@ -385,7 +388,7 @@
              * @function DataDisplay.getFieldSelector
              * @param {string} field the field we want a selector for
              * @return {string} the field wrapped in a name selector
-             * @memberOf DataDisplay
+             * @memberof DataDisplay
              */
             dataDisplay.getFieldSelector = function (field) {
                 // return the provided field name wrapped in a name selctor
@@ -398,7 +401,7 @@
              * @function DataDisplay.escapeRegExp
              * @param {string} str the string we want to clean
              * @return {string} the clean string
-             * @memberOf DataDisplay
+             * @memberof DataDisplay
              */
             dataDisplay.escapeRegExp = function (str) {
                 // escape the given string, allow special chars to safely appear in regex expression
@@ -413,7 +416,7 @@
              * @param {array} fields an array of all {variables} defined in the conditions string
              * @param {object} el the element we are applying defaluts for
              * @param {object} ctx the outer element we can use as context
-             * @memberOf DataDisplay
+             * @memberof DataDisplay
              */
             dataDisplay.applyResets = function (resets, fields, el, $ctx) {
                 // default action is to hide the element
@@ -434,7 +437,7 @@
              * @param {array} fields an array of all {variables} defined in the conditions string
              * @param {object} el the element we are applying defaluts for
              * @param {object} ctx the outer element we can use as context
-             * @memberOf DataDisplay
+             * @memberof DataDisplay
              */
             dataDisplay.applyConditions = function (conditions, fields, el, $ctx) {
                 // hold outer ctx;
@@ -481,7 +484,7 @@
              * @function DataDisplay.replaceFieldValHolders
              * @param {string} condition the condition being considered
              * @param {string} fields the fields being replaced
-             * @memberOf DataDisplay
+             * @memberof DataDisplay
              */
             dataDisplay.replaceFieldValHolders = function (conditions, fields) {
                 // hold outer ctx;
@@ -525,7 +528,7 @@
              * @function DataDisplay.showOnCondition
              * @param {string} condition the condition being considered
              * @param {object} el the element we are applying the condition to
-             * @memberOf DataDisplay
+             * @memberof DataDisplay
              */
             dataDisplay.showOnCondition = function (conditions, el) {
                 // strip final ';' from string before invoking
@@ -545,7 +548,7 @@
              * @function DataDisplay.funcOnCondition
              * @param {array} conditionalParts a two part construct spliting the condition from the resolution funcs
              * @param {object} el the element we are applying the condition to
-             * @memberOf DataDisplay
+             * @memberof DataDisplay
              */
             dataDisplay.funcOnCondition = function (conditionalParts, el) {
                 // carry out the single action as defined against the condition
@@ -578,7 +581,7 @@
              *
              * @function DataDisplay.destroy
              * @return {object} return this to allow for the base instance to be kept and removed manually
-             * @memberOf DataDisplay
+             * @memberof DataDisplay
              */
             dataDisplay.destroy = function (undefined) {
                 // hold outer ctx;
