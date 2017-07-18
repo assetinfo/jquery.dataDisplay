@@ -210,8 +210,8 @@
 
 <!-- allow for multiple side-effects in single conditions
  ... data-display="
-  {val} > 0; ||
-  {val} < 1 :: $(var).css('background','#bdbdbd'); ||
+  {val} > 0; &#124;&#124;
+  {val} < 1 :: $(var).css('background','#bdbdbd'); &#124;&#124;
   {val} > 1 && {val} < 2 :: $(var).css('background','#bdbdbd');
  " ...
  -->
@@ -221,7 +221,8 @@
 
 ```HTML
 ...
-    data-display="length({inputTest}) is greater than 6;"
+    data-display="length({inputTest}) is greater than 6 ::
+        $this.css('background', '#000');"
 ...
 ```
 
@@ -245,10 +246,10 @@ Each side-affect should be a jQuery function (.css, .data, .scrollTop... etc), t
     data-display-resets="$this.css('background', '#fff');"
 ...
 ```
-* Conditions may be grouped in brackets ({condition} == "value" || {condition} == "value2")
+* Conditions may be grouped in brackets ({condition} == "value" &#124;&#124; {condition} == "value2")
 ```HTML
 ...
-    data-display="(length({inputTest}) is greater than 6 && length({inputTest}) is less than 12) ::
+    data-display="(length({inputTest}) is greater than 6 &amp;&amp; length({inputTest}) is less than 12) ::
         $this.css('background', '#000');"
     data-display-resets="$this.css('background', '#fff');"
 ...
@@ -258,17 +259,17 @@ Each side-affect should be a jQuery function (.css, .data, .scrollTop... etc), t
 
 ```HTML
 ...
-    data-display="(length({inputTest}) is greater than 6 && length({inputTest}) is less than 12);"
+    data-display="(length({inputTest}) is greater than 6 &amp;&amp; length({inputTest}) is less than 12);"
 ...
 ```
 
-* Multiple conditions may be defined against the same data-display attr by separating each condition with a double pipe (||)
+* Multiple conditions may be defined against the same data-display attr by separating each condition with a double pipe (&#124;&#124;)
 
 ```HTML
 ...
     data-display="
         length({inputTest}) is greater than 6 ::
-            $this.css('background', '#000'); ||
+            $this.css('background', '#000'); &#124;&#124;
         length({inputTest}) is greater than 12 ::
             $this.css('background', '#ddd');"
     data-display-resets="$this.css('background', '#fff');"
