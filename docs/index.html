@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=yes, width=device-width">
+  <title>jquery.dataDisplay — Index</title>
+  <link rel="shortcut icon" href="/favicon.ico">
+
+  <!--[if lt IE 9]>
+  <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link type="text/css" rel="stylesheet" href="styles/sunlight.dark.css">
+
+  <link type="text/css" rel="stylesheet" href="styles/site.oblivion.css">
+</head>
+<body>
+<div class="container-fluid">
+  <div class="navbar navbar-fixed-top navbar-inverse">
+    <div class="navbar-inner">
+      <a class="brand" href="index.html">jquery.dataDisplay</a>
+      <ul class="nav">
+        
+        <li class="dropdown">
+          <a href="namespaces.list.html" class="dropdown-toggle" data-toggle="dropdown">Namespaces<b
+            class="caret"></b></a>
+
+          <ul class="dropdown-menu ">
+            
+            <li>
+              <a href="$.fn.DataDisplay.html">$.fn.DataDisplay</a>
+            </li>
+            
+
+          </ul>
+        </li>
+        
+        <li class="dropdown">
+          <a href="classes.list.html" class="dropdown-toggle" data-toggle="dropdown">Classes<b
+            class="caret"></b></a>
+
+          <ul class="dropdown-menu ">
+            
+            <li>
+              <a href="DataDisplay.html">DataDisplay</a>
+            </li>
+            
+
+          </ul>
+        </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  <div class="row-fluid">
+
+    
+    <div class="span3">
+      <div id="toc"></div>
+    </div>
+    
+
+    
+    <div class="span9">
+      
+        <div id="main">
+          
+
+
+	
+	<span class="page-title">Index</span>
+	
+	
+
+
+
+
+
+
+
+
+
+
+
+
+	
+	
+
+
+
+
+
+    <section class="readme-section">
+        <article><h1><a href="https://github.com/assetinfo/jquery.dataDisplay">jquery.dataDisplay</a>         <a href="https://travis-ci.org/assetinfo/jquery.dataDisplay"><img src="https://travis-ci.org/assetinfo/jquery.dataDisplay.png" alt="Build Status"></a></h1><blockquote>
+<p>jquery.dataDisplay.js aids the developer in writing concise conditions against elements within a form based setting, in order to control the display of elements based on the state of a form.</p>
+</blockquote>
+<hr>
+<h2>Demo</h2><ul>
+<li><a href="https://jsfiddle.net/graydixon/tchmmn27/">Demo on jsfiddle</a>.</li>
+</ul>
+<h2>Initialising a form with conditionally displayed elements</h2><ul>
+<li><p>A dataDisplay instance is initialised against a div which contains at least one element that has data-display tags:</p>
+<ul>
+<li><p>HTML</p>
+<pre class="prettyprint source lang-HTML"><code>...
+  &lt;div id=&quot;container&quot;>
+      &lt;input name=&quot;inputTest&quot; type=&quot;value&quot;>
+      &lt;div class=&quot;dataDisplay&quot; data-display=&quot;{inputTest} == 'testing';&quot;
+          &lt;a>Test&lt;/a>
+      &lt;/div>
+  &lt;/div>
+...</code></pre></li>
+<li><p>Javascript</p>
+<pre class="prettyprint source lang-javascript"><code>...
+  var dataDisplay = $('#container').dataDisplay({...options...});
+...</code></pre></li>
+<li><p>Options</p>
+<pre class="prettyprint source lang-javascript"><code>...
+  // provide an array of func methods to extend the built-in helper methods
+  funcs: {},
+  // name to bind the events against
+  eventName: '.dataDisplay',
+  // data-attribute to bind DataDisplay instance against (against the $el)
+  dataAttr: 'dataDisplay',
+  // attribute holding the conditions on first-load
+  condsAttr: 'data-display',
+  // attribute holding resets on first load (defined as jquery statements against $this)
+  resetsAttr: 'data-display-resets',
+  // should the plugin fire during the setup phase?
+  initFire: true,
+  // should the plugin fire on key events?
+  keyEventsFire: true
+...</code></pre></li>
+</ul>
+</li>
+</ul>
+<h2>Documentation</h2><ul>
+<li><a href="https://assetinfo.github.io/jquery.dataDisplay/docs/jquery.dataDisplay.html">jquery.dataDisplay's documentation</a> has been generated using <a href="https://github.com/jsdoc3/jsdoc">jsDocs 3.5.3</a></li>
+</ul>
+<h2>Installing, building and testing</h2><ol>
+<li><p><a href="https://github.com/assetinfo/jquery.dataDisplay/archive/master.zip">Download</a> or clone this repo...</p>
+<pre class="prettyprint source"><code>$ git clone git@github.com:assetinfo/jquery.dataDisplay.git</code></pre></li>
+<li><p>Navigate to the directory containing jquery.dataDisplay and run...</p>
+<pre class="prettyprint source"><code>$ npm install</code></pre></li>
+<li><p>Followed by...</p>
+<pre class="prettyprint source"><code>$ bower install</code></pre></li>
+<li><p>Then to build run...</p>
+<pre class="prettyprint source"><code>$ grunt</code></pre></li>
+<li><p>And to test run...</p>
+<pre class="prettyprint source"><code>$ grunt test</code></pre></li>
+<li><p>To use in your own project...</p>
+<ul>
+<li>include dependencies and minified version of jquery.dataDisplay.js</li>
+</ul>
+<pre class="prettyprint source lang-HTML"><code>&lt;link rel=&quot;stylesheet&quot; href=&quot;./src/css/jquery.dataDisplay.css&quot;/>
+&lt;script src=&quot;./bower_components/jquery/dist/jquery.js&quot;>&lt;/script>
+&lt;script src=&quot;./dist/jquery.dataDisplay.min.js&quot;>&lt;/script></code></pre><ul>
+<li>or include the optimised versions from ./dist/:</li>
+</ul>
+<pre class="prettyprint source lang-HTML"><code>&lt;link rel=&quot;stylesheet&quot; href=&quot;./dist/jquery.dataDisplay.optimised.css&quot;/>
+&lt;script src=&quot;./dist/jquery.dataDisplay.optimised.js&quot;>&lt;/script></code></pre><ul>
+<li>alternatively, <a href="http://requirejs.org/">require</a> jquery.dataDisplay in a <a href="https://github.com/assetinfo/jquery.dataDisplay/blob/master/main.js">module</a> with the following in your config file...</li>
+</ul>
+<pre class="prettyprint source lang-javascript"><code>require.config({
+    &quot;deps&quot;: [&quot;main&quot;],
+    &quot;paths&quot;: {
+        &quot;jquery&quot;: &quot;bower_components/jquery/dist/jquery&quot;,
+        &quot;dataDisplay&quot;: &quot;src/js/jquery.dataDisplay&quot;
+    },
+    &quot;shim&quot;: {
+        &quot;jquery&quot;: { &quot;exports&quot;: &quot;$&quot; }
+    }
+});</code></pre></li>
+</ol>
+<h2>Built-in helper methods:</h2><ul>
+<li>!empty() - check if a variable is NOT empty</li>
+</ul>
+<pre class="prettyprint source lang-HTML"><code>...
+   data-display=&quot;!empty({inputTest});&quot;
+...</code></pre><ul>
+<li>empty() - check if a variable is empty</li>
+</ul>
+<pre class="prettyprint source lang-HTML"><code>...
+   data-display=&quot;empty({inputTest});&quot;
+...</code></pre><ul>
+<li>length() - check the length of a variable</li>
+</ul>
+<pre class="prettyprint source lang-HTML"><code>...
+   data-display=&quot;length({inputTest}) > 6;&quot;
+...</code></pre><ul>
+<li>is greater than or equal to - check that a variable is greater than or equal to the criteria</li>
+</ul>
+<pre class="prettyprint source lang-HTML"><code>...
+   data-display=&quot;{inputTest} is greater than or equal to 6;&quot;
+...</code></pre><ul>
+<li>is less than or equal to - check that a variable is less than or equal to the criteria</li>
+</ul>
+<pre class="prettyprint source lang-HTML"><code>...
+   data-display=&quot;{inputTest} is less than or equal to 6;&quot;
+...</code></pre><ul>
+<li>is greater than - check that a variable is greater than the criteria</li>
+</ul>
+<pre class="prettyprint source lang-HTML"><code>...
+   data-display=&quot;{inputTest} is greater than 6;&quot;
+...</code></pre><ul>
+<li>is less than - check that a variable is less than the criteria</li>
+</ul>
+<pre class="prettyprint source lang-HTML"><code>...
+   data-display=&quot;{inputTest} is less than 6;&quot;
+...</code></pre><ul>
+<li>is equal to - check that a variable is == to the criteria</li>
+</ul>
+<pre class="prettyprint source lang-HTML"><code>...
+   data-display=&quot;{inputTest} is equal to 6;&quot;
+...</code></pre><h4>Extending the helper methods object:</h4><ul>
+<li>The helper methods may be extended by providing an array of helpers in the options provided to $.fn.dataDisplay at init...</li>
+</ul>
+<pre class="prettyprint source lang-javascript"><code>...
+   $('#container').dataDisplay({
+       'funcs': {
+           'sum': {
+               rgx: 'sum\\({([^}]+)}\\)',
+               exec: function (field, ctx) {
+
+                   ... sum all values against the given field ...
+
+                   return str;
+               }
+           }
+       }
+   });
+...</code></pre><h2>Writing conditions and statements</h2><!-- allow for multiple side-effects in single conditions
+ ... data-display="
+  {val} > 0; &#124;&#124;
+  {val} < 1 :: $(var).css('background','#bdbdbd'); &#124;&#124;
+  {val} > 1 && {val} < 2 :: $(var).css('background','#bdbdbd');
+ " ...
+ -->
+<h4>Syntax</h4><ul>
+<li>A condition consists of {variables}, helper method calls (eg length()) and side-affects (any statements following a '::' after a condition (optional)).</li>
+</ul>
+<pre class="prettyprint source lang-HTML"><code>...
+    data-display=&quot;length({inputTest}) is greater than 6 ::
+        $this.css('background', '#000');&quot;
+...</code></pre><ul>
+<li>Any side-affects should be defined after the condition, separated by a double-colon (::).<br/>
+Each condition may hold one or more side-affects where each side-affect is separated by a semicolon ';'.<br/>
+Each side-affect should be a jQuery function (.css, .data, .scrollTop... etc), the element is passed to the execution scope as $this ($this.css(...), $this.data(...), $this.scrollTop(...)... etc).</li>
+</ul>
+<pre class="prettyprint source lang-HTML"><code>...
+    data-display=&quot;length({inputTest}) is greater than 6 ::
+        $this.css('background', '#000'); $this.css('font-size', '16px');&quot;
+...</code></pre><ul>
+<li>The data-display-resets attribute should undo any actions performed by the data-display condition(s).</li>
+</ul>
+<pre class="prettyprint source lang-HTML"><code>...
+    data-display=&quot;length({inputTest}) is greater than 6 ::
+        $this.css('background', '#000');&quot;
+    data-display-resets=&quot;$this.css('background', '#fff');&quot;
+...</code></pre><ul>
+<li><p>Logical conditions can be grouped in brackets ({condition} == &quot;value&quot; &#124;&#124; {condition} == &quot;value2&quot;)</p>
+<pre class="prettyprint source lang-HTML"><code>...
+  data-display=&quot;(length({inputTest}) is greater than 6 && length({inputTest}) is less than 12) ::
+      $this.css('background', '#000');&quot;
+  data-display-resets=&quot;$this.css('background', '#fff');&quot;
+...</code></pre></li>
+<li><p>If the condition does not define any side-affects, then it will instead control the display state (display: block) - the reverse action (*-resets) is implied.</p>
+</li>
+</ul>
+<pre class="prettyprint source lang-HTML"><code>...
+    data-display=&quot;(length({inputTest}) is greater than 6 && length({inputTest}) is less than 12);&quot;
+...</code></pre><ul>
+<li>Multiple conditions may be defined against the same data-display attr by separating each condition with a double pipe (&#124;&#124;)</li>
+</ul>
+<pre class="prettyprint source lang-HTML"><code>...
+    data-display=&quot;
+        length({inputTest}) is greater than 6 ::
+            $this.css('background', '#000'); ||
+        length({inputTest}) is greater than 12 ::
+            $this.css('background', '#ddd');&quot;
+    data-display-resets=&quot;$this.css('background', '#fff');&quot;
+...</code></pre><h2>License</h2><ul>
+<li><a href="https://github.com/assetinfo/jquery.dataDisplay/blob/master/LICENSE">Licensed</a> under the MIT License (MIT).</li>
+</ul>
+<h2>Contact us</h2><ul>
+<li><a href="mailto:gdixon@assetinfo.co.uk?Subject=jQuery.dataDisplay%20Enquiry...">Contact us</a> if you need any further information or guidance (email: gdixon@assetinfo.co.uk).</li>
+</ul></article>
+    </section>
+
+
+
+
+
+
+
+        </div>
+
+        <div class="clearfix"></div>
+        <footer>
+          
+          
+    <span class="copyright">
+    Copyright © 2014 Graham Dixon, MML LTD - Assetinfo.</a>
+    </span>
+          <br />
+          
+    <span class="jsdoc-message">
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc" target="_blank">JSDoc 3.5.3</a>
+    on 2017-07-18T19:56:05+01:00
+    </span>
+        </footer>
+      </div>
+
+      <br clear="both">
+    </div>
+
+  </div>
+  <!--<script src="scripts/sunlight.js"></script>-->
+  <script src="scripts/docstrap.lib.js"></script>
+  <script src="scripts/bootstrap-dropdown.js"></script>
+  <script src="scripts/toc.js"></script>
+
+  <script>
+    $( function () {
+      $( "[id*='$']" ).each( function () {
+        var $this = $( this );
+
+        $this.attr( "id", $this.attr( "id" ).replace( "$", "__" ) );
+      } );
+
+      $( "#toc" ).toc( {
+        anchorName  : function ( i, heading, prefix ) {
+          return $( heading ).attr( "id" ) || ( prefix + i );
+        },
+        selectors   : "h1,h2,h3,h4",
+        showAndHide : false,
+        scrollTo    : "100px"
+      } );
+
+      $( "#toc>ul" ).addClass( "nav nav-pills nav-stacked" );
+      $( "#main span[id^='toc']" ).addClass( "toc-shim" );
+      $( '.dropdown-toggle' ).dropdown();
+//      $( ".tutorial-section pre, .readme-section pre" ).addClass( "sunlight-highlight-javascript" ).addClass( "linenums" );
+
+      $( ".tutorial-section pre, .readme-section pre" ).each( function () {
+        var $this = $( this );
+
+        var example = $this.find( "code" );
+        exampleText = example.html();
+        var lang = /{@lang (.*?)}/.exec( exampleText );
+        if ( lang && lang[1] ) {
+          exampleText = exampleText.replace( lang[0], "" );
+          example.html( exampleText );
+          lang = lang[1];
+        } else {
+          lang = "javascript";
+        }
+
+        if ( lang ) {
+
+          $this
+            .addClass( "sunlight-highlight-" + lang )
+            .addClass( "linenums" )
+            .html( example.html() );
+
+        }
+      } );
+
+      Sunlight.highlightAll( {
+        lineNumbers : true,
+        showMenu : true,
+        enableDoclinks : true
+      } );
+    } );
+   </script>
+
+
+
+  <!--Navigation and Symbol Display-->
+  
+
+
+  <!--Google Analytics-->
+  
+
+</body>
+</html>
