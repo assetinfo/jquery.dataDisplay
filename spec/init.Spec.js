@@ -109,7 +109,7 @@ describe("Initialise a dataDisplay div with multiple condition (based on the sta
 describe("Initialise a dataDisplay div with a single condition and multiple side-affect statements (based on the state of a text input).", function() {
     beforeEach(function() {
         // append the basic element and coditions to the body
-        $('body').append('<div id="test3"><input name="inputTest" type="value"/><div class="dataDisplay" data-display="{inputTest} == \'testing\' :: $this.css(\'color\', \'rgb(0, 0, 255)\'); $this.attr(\'dataDisplayState\', \'true\');" data-display-resets="$this.css(\'color\', \'rgb(0, 0, 0)\'); $this.attr(\'dataDisplayState\', \'false\');"><a>Test</a></div></div>');
+        $('body').append('<div id="test3"><input name="inputTest" type="value"/><div class="dataDisplay" data-display="{inputTest} == \'testing\' :: $this.show(); $this.css(\'color\', \'rgb(0, 0, 255)\'); $this.attr(\'dataDisplayState\', \'true\');" data-display-resets="$this.css(\'color\', \'rgb(0, 0, 0)\'); $this.attr(\'dataDisplayState\', \'false\');"><a>Test</a></div></div>');
         // initiate against the #container element
         $('#test3').dataDisplay();
     });
@@ -159,7 +159,7 @@ describe("Initialise a dataDisplay div with a single condition and multiple side
 describe("Initialise a dataDisplay div with multiple conditions and multiple side-affect statements (based on the state of a text input).", function() {
     beforeEach(function() {
         // append the basic element and coditions to the body
-        $('body').append('<div id="test4"><input name="inputTest" type="value"/><div class="dataDisplay" data-display="{inputTest} == \'testing\' :: $this.css(\'color\', \'rgb(0, 0, 255)\'); $this.attr(\'dataDisplayState\', \'true\'); || {inputTest} == \'test\' :: $this.css(\'color\', \'rgb(255, 0, 0)\'); $this.attr(\'dataDisplayState\', \'true\');" data-display-resets="$this.css(\'color\', \'rgb(0, 0, 0)\'); $this.attr(\'dataDisplayState\', \'false\');"><a>Test</a></div></div>');
+        $('body').append('<div id="test4"><input name="inputTest" type="value"/><div class="dataDisplay" data-display="{inputTest} == \'testing\' :: $this.show(); $this.css(\'color\', \'rgb(0, 0, 255)\'); $this.attr(\'dataDisplayState\', \'true\'); || {inputTest} == \'test\' :: $this.show(); $this.css(\'color\', \'rgb(255, 0, 0)\'); $this.attr(\'dataDisplayState\', \'true\');" data-display-resets="$this.css(\'color\', \'rgb(0, 0, 0)\'); $this.attr(\'dataDisplayState\', \'false\');"><a>Test</a></div></div>');
         // initiate against the #container element
         $('#test4').dataDisplay();
     });

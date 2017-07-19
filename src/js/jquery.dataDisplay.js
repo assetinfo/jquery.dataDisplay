@@ -372,7 +372,7 @@
              */
             dataDisplay.applyResets = function (resets, fields, $el, $ctx) {
                 // default action is to hide the element
-                $($el, $ctx).hide();
+                $el.hide();
                 // for each field present in the conditions, replace its {var} with its value
                 resets = this.replaceFieldValHolders(resets, fields, $ctx);
                 // apply resets as js functions against given el
@@ -444,9 +444,9 @@
                 // check the condition and show/hide the el
                 var condition = "return (" + conditions + ");";
                 // execute the condition and if true display the element
-                if (new Function(condition)() == true) {
+                if (new Function(condition)() === true) {
                     // show the given element
-                    $($el).show();
+                    $el.show();
                 }
             };
 
@@ -469,9 +469,7 @@
                         // carry out the work defined in each conditional statement
                         for (var j = 0; j < conditionalPartsSplit.length; j++) {
                             // when the condition is satisified build and trigger the func
-                            if (new Function(condition)() == true) {
-                                // default action is to show the element - implied so that it may be fully ommitted from the condition
-                                $($el).show();
+                            if (new Function(condition)() === true) {
                                 // create the function associated with this conditionsPart
                                 var outcomes = " return (" + (conditionalPartsSplit[j].length ? conditionalPartsSplit[j] : 'true') + ");";
                                 // apply the dataFunc aginst the given el

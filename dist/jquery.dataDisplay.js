@@ -138,8 +138,7 @@
                 }, threshold), callNow && func.apply(context, args);
             };
         }, dataDisplay.applyResets = function(resets, fields, $el, $ctx) {
-            $($el, $ctx).hide(), resets = this.replaceFieldValHolders(resets, fields, $ctx), 
-            new Function("$this", resets || "")($el);
+            $el.hide(), resets = this.replaceFieldValHolders(resets, fields, $ctx), new Function("$this", resets || "")($el);
         }, dataDisplay.applyConditions = function(conditions, fields, $el, $ctx) {
             var that = this;
             for (func in that.funcs) for (var f = that.funcs[func], r = new RegExp(f.rgx, "gi"); null != (m = r.exec(conditions)); ) {
@@ -152,12 +151,11 @@
             }
         }, dataDisplay.showOnCondition = function(conditions, $el) {
             var condition = "return (" + (conditions = conditions.replace(/;(\s+)?$/, "")) + ");";
-            1 == new Function(condition)() && $($el).show();
+            !0 === new Function(condition)() && $el.show();
         }, dataDisplay.funcOnCondition = function(conditionalParts, $el) {
             for (var i = 0; i < conditionalParts.length; i++) {
                 var condition = "return (" + conditionalParts[0] + ");";
-                if (i > 0) for (var conditionalPartsSplit = conditionalParts[i].split(";"), j = 0; j < conditionalPartsSplit.length; j++) if (1 == new Function(condition)()) {
-                    $($el).show();
+                if (i > 0) for (var conditionalPartsSplit = conditionalParts[i].split(";"), j = 0; j < conditionalPartsSplit.length; j++) if (!0 === new Function(condition)()) {
                     var outcomes = " return (" + (conditionalPartsSplit[j].length ? conditionalPartsSplit[j] : "true") + ");";
                     new Function("$this", outcomes)($el);
                 }
