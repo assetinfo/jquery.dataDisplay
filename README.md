@@ -162,7 +162,7 @@
     ...
        data-display="{inputTest} is greater than or equal to 6;"
     ...
-```
+    ```
 
 * is less than or equal to - check that a variable is less than or equal to the criteria
 
@@ -170,7 +170,7 @@
     ...
        data-display="{inputTest} is less than or equal to 6;"
     ...
-```
+    ```
 
 * is greater than - check that a variable is greater than the criteria
 
@@ -178,7 +178,7 @@
     ...
        data-display="{inputTest} is greater than 6;"
     ...
-```
+    ```
 
 * is less than - check that a variable is less than the criteria
 
