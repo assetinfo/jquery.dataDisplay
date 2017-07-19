@@ -289,7 +289,9 @@ Each side-affect should be a jQuery function (.css, .data, .scrollTop... etc), t
 ```
 
 <h2 id="License">License</h2>
-  * [Licensed](https://github.com/assetinfo/jquery.dataDisplay/blob/master/LICENSE) under the MIT License (MIT).
+
+* [Licensed](https://github.com/assetinfo/jquery.dataDisplay/blob/master/LICENSE) under the MIT License (MIT).
 
 <h2 id="Contact">Contact us</h2>
- * [Contact us](mailto:gdixon@assetinfo.co.uk?Subject=jQuery.dataDisplay%20Enquiry...) if you need any further information or guidance (email: gdixon@assetinfo.co.uk).
+
+* [Contact us](mailto:gdixon@assetinfo.co.uk?Subject=jQuery.dataDisplay%20Enquiry...) if you need any further information or guidance (email: gdixon@assetinfo.co.uk).
