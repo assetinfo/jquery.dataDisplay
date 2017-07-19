@@ -152,63 +152,58 @@
 
 
 <ul>
-<li>!empty() - check if a variable is NOT empty</li>
+<li><p>!empty() - check if a variable is NOT empty</p>
+<pre class="prettyprint source lang-HTML"><code>  ...
+     data-display=&quot;!empty({inputTest});&quot;
+  ...</code></pre></li>
+<li><p>empty() - check if a variable is empty</p>
+<pre class="prettyprint source lang-HTML"><code>  ...
+     data-display=&quot;empty({inputTest});&quot;
+  ...</code></pre></li>
+<li><p>length() - check the length of a variable</p>
+<pre class="prettyprint source lang-HTML"><code>  ...
+     data-display=&quot;length({inputTest}) > 6;&quot;
+  ...</code></pre></li>
+<li><p>is greater than or equal to - check that a variable is greater than or equal to the criteria</p>
+<pre class="prettyprint source lang-HTML"><code>  ...
+     data-display=&quot;{inputTest} is greater than or equal to 6;&quot;
+  ...</code></pre></li>
+<li><p>is less than or equal to - check that a variable is less than or equal to the criteria</p>
+<pre class="prettyprint source lang-HTML"><code>  ...
+     data-display=&quot;{inputTest} is less than or equal to 6;&quot;
+  ...</code></pre></li>
+<li><p>is greater than - check that a variable is greater than the criteria</p>
+<pre class="prettyprint source lang-HTML"><code>  ...
+     data-display=&quot;{inputTest} is greater than 6;&quot;
+  ...</code></pre></li>
+<li><p>is less than - check that a variable is less than the criteria</p>
+<pre class="prettyprint source lang-HTML"><code>  ...
+     data-display=&quot;{inputTest} is less than 6;&quot;
+  ...</code></pre></li>
+<li><p>is equal to - check that a variable is == to the criteria</p>
+<pre class="prettyprint source lang-HTML"><code>  ...
+     data-display=&quot;{inputTest} is equal to 6;&quot;
+  ...</code></pre></li>
 </ul>
-<pre class="prettyprint source lang-HTML"><code>...
-   data-display=&quot;!empty({inputTest});&quot;
-...</code></pre><ul>
-<li>empty() - check if a variable is empty</li>
-</ul>
-<pre class="prettyprint source lang-HTML"><code>...
-   data-display=&quot;empty({inputTest});&quot;
-...</code></pre><ul>
-<li>length() - check the length of a variable</li>
-</ul>
-<pre class="prettyprint source lang-HTML"><code>...
-   data-display=&quot;length({inputTest}) > 6;&quot;
-...</code></pre><ul>
-<li>is greater than or equal to - check that a variable is greater than or equal to the criteria</li>
-</ul>
-<pre class="prettyprint source lang-HTML"><code>...
-   data-display=&quot;{inputTest} is greater than or equal to 6;&quot;
-...</code></pre><ul>
-<li>is less than or equal to - check that a variable is less than or equal to the criteria</li>
-</ul>
-<pre class="prettyprint source lang-HTML"><code>...
-   data-display=&quot;{inputTest} is less than or equal to 6;&quot;
-...</code></pre><ul>
-<li>is greater than - check that a variable is greater than the criteria</li>
-</ul>
-<pre class="prettyprint source lang-HTML"><code>...
-   data-display=&quot;{inputTest} is greater than 6;&quot;
-...</code></pre><ul>
-<li>is less than - check that a variable is less than the criteria</li>
-</ul>
-<pre class="prettyprint source lang-HTML"><code>...
-   data-display=&quot;{inputTest} is less than 6;&quot;
-...</code></pre><ul>
-<li>is equal to - check that a variable is == to the criteria</li>
-</ul>
-<pre class="prettyprint source lang-HTML"><code>...
-   data-display=&quot;{inputTest} is equal to 6;&quot;
-...</code></pre><h4>Extending the helper methods object:</h4><ul>
-<li>The helper methods may be extended by providing an array of helpers in the options provided to $.fn.dataDisplay at init...</li>
-</ul>
-<pre class="prettyprint source lang-javascript"><code>...
-   $('#container').dataDisplay({
-       'funcs': {
-           'sum': {
-               rgx: 'sum\\({([^}]+)}\\)',
-               exec: function (field, ctx) {
+<h4>Extending the helper methods object:</h4><ul>
+<li><p>The helper methods may be extended by providing an array of helpers in the options provided to $.fn.dataDisplay at init...</p>
+<pre class="prettyprint source lang-javascript"><code>  ...
+     $('#container').dataDisplay({
+         'funcs': {
+             'sum': {
+                 rgx: 'sum\\({([^}]+)}\\)',
+                 exec: function (field, ctx) {
 
-                   ... sum all values against the given field ...
+                     ... sum all values against the given field ...
 
-                   return str;
-               }
-           }
-       }
-   });
-...</code></pre><h2 id="Syntax">Writing conditions and statements</h2>
+                     return str;
+                 }
+             }
+         }
+     });
+  ...</code></pre></li>
+</ul>
+<h2 id="Syntax">Writing conditions and statements</h2>
 
 <!-- allow for multiple side-effects in single conditions
  ... data-display="
@@ -218,49 +213,45 @@
  " ...
  -->
 <h4>Syntax</h4><ul>
-<li>A condition consists of {variables}, helper method calls (eg length()) and side-affects (any statements following a '::' after a condition (optional)).</li>
-</ul>
-<pre class="prettyprint source lang-HTML"><code>...
-    data-display=&quot;length({inputTest}) is greater than 6 ::
-        $this.css('background', '#000');&quot;
-...</code></pre><ul>
-<li>Any side-affects should be defined after the condition, separated by a double-colon (::).<br/>
+<li><p>A condition consists of {variables}, helper method calls (eg length()) and side-affects (any statements following a '::' after a condition (optional)).</p>
+<pre class="prettyprint source lang-HTML"><code>  ...
+      data-display=&quot;length({inputTest}) is greater than 6 ::
+          $this.css('background', '#000');&quot;
+  ...</code></pre></li>
+<li><p>Any side-affects should be defined after the condition, separated by a double-colon (::).<br/>
 Each condition may hold one or more side-affects where each side-affect is separated by a semicolon ';'.<br/>
-Each side-affect should be a jQuery function (.css, .data, .scrollTop... etc), the element is passed to the execution scope as $this ($this.css(...), $this.data(...), $this.scrollTop(...)... etc).</li>
-</ul>
-<pre class="prettyprint source lang-HTML"><code>...
-    data-display=&quot;length({inputTest}) is greater than 6 ::
-        $this.css('background', '#000'); $this.css('font-size', '16px');&quot;
-...</code></pre><ul>
-<li>The data-display-resets attribute should undo any actions performed by the data-display condition(s).</li>
-</ul>
-<pre class="prettyprint source lang-HTML"><code>...
-    data-display=&quot;length({inputTest}) is greater than 6 ::
-        $this.css('background', '#000');&quot;
-    data-display-resets=&quot;$this.css('background', '#fff');&quot;
-...</code></pre><ul>
+Each side-affect should be a jQuery function (.css, .data, .scrollTop... etc), the element is passed to the execution scope as $this ($this.css(...), $this.data(...), $this.scrollTop(...)... etc).</p>
+<pre class="prettyprint source lang-HTML"><code>  ...
+      data-display=&quot;length({inputTest}) is greater than 6 ::
+          $this.css('background', '#000'); $this.css('font-size', '16px');&quot;
+  ...</code></pre></li>
+<li><p>The data-display-resets attribute should undo any actions performed by the data-display condition(s).</p>
+<pre class="prettyprint source lang-HTML"><code>  ...
+      data-display=&quot;length({inputTest}) is greater than 6 ::
+          $this.css('background', '#000');&quot;
+      data-display-resets=&quot;$this.css('background', '#fff');&quot;
+  ...</code></pre></li>
 <li><p>Logical conditions can be grouped in brackets ({condition} == &quot;value&quot; &#124;&#124; {condition} == &quot;value2&quot;)</p>
-<pre class="prettyprint source lang-HTML"><code>...
-  data-display=&quot;(length({inputTest}) is greater than 6 && length({inputTest}) is less than 12) ::
-      $this.css('background', '#000');&quot;
-  data-display-resets=&quot;$this.css('background', '#fff');&quot;
-...</code></pre></li>
+<pre class="prettyprint source lang-HTML"><code>  ...
+      data-display=&quot;(length({inputTest}) is greater than 6 && length({inputTest}) is less than 12) ::
+          $this.css('background', '#000');&quot;
+      data-display-resets=&quot;$this.css('background', '#fff');&quot;
+  ...</code></pre></li>
 <li><p>If the condition does not define any side-affects, then it will instead control the display state (display: block) - the reverse action (*-resets) is implied.</p>
-</li>
+<pre class="prettyprint source lang-HTML"><code>  ...
+      data-display=&quot;(length({inputTest}) is greater than 6 && length({inputTest}) is less than 12);&quot;
+  ...</code></pre></li>
+<li><p>Multiple conditions may be defined against the same data-display attr by separating each condition with a double pipe (&#124;&#124;)</p>
+<pre class="prettyprint source lang-HTML"><code>  ...
+      data-display=&quot;
+          length({inputTest}) is greater than 6 ::
+              $this.css('background', '#000'); ||
+          length({inputTest}) is greater than 12 ::
+              $this.css('background', '#ddd');&quot;
+      data-display-resets=&quot;$this.css('background', '#fff');&quot;
+  ...</code></pre></li>
 </ul>
-<pre class="prettyprint source lang-HTML"><code>...
-    data-display=&quot;(length({inputTest}) is greater than 6 && length({inputTest}) is less than 12);&quot;
-...</code></pre><ul>
-<li>Multiple conditions may be defined against the same data-display attr by separating each condition with a double pipe (&#124;&#124;)</li>
-</ul>
-<pre class="prettyprint source lang-HTML"><code>...
-    data-display=&quot;
-        length({inputTest}) is greater than 6 ::
-            $this.css('background', '#000'); ||
-        length({inputTest}) is greater than 12 ::
-            $this.css('background', '#ddd');&quot;
-    data-display-resets=&quot;$this.css('background', '#fff');&quot;
-...</code></pre><h2 id="License">License</h2>
+<h2 id="License">License</h2>
 
 <ul>
 <li><a href="https://github.com/assetinfo/jquery.dataDisplay/blob/master/LICENSE">Licensed</a> under the MIT License (MIT).</li>
@@ -282,7 +273,7 @@ Each side-affect should be a jQuery function (.css, .data, .scrollTop... etc), t
 <br class="clear">
 
 <footer align="center">
-    Generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.3</a> on Wed Jul 19 2017 22:14:12 GMT+0100 (BST) using the Minami theme.
+    Generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.3</a> on Wed Jul 19 2017 23:23:10 GMT+0100 (BST) using the Minami theme.
      <br/> Copyright © 2014-2017 Graham Dixon, MML LTD - Assetinfo.</a>
 </footer>
 

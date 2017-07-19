@@ -134,89 +134,89 @@
 
 * !empty() - check if a variable is NOT empty
 
-```HTML
-...
-   data-display="!empty({inputTest});"
-...
-```
+    ```HTML
+    ...
+       data-display="!empty({inputTest});"
+    ...
+    ```
 
 * empty() - check if a variable is empty
 
-```HTML
-...
-   data-display="empty({inputTest});"
-...
-```
+    ```HTML
+    ...
+       data-display="empty({inputTest});"
+    ...
+    ```
 
 * length() - check the length of a variable
 
-```HTML
-...
-   data-display="length({inputTest}) > 6;"
-...
-```
+    ```HTML
+    ...
+       data-display="length({inputTest}) > 6;"
+    ...
+    ```
 
 * is greater than or equal to - check that a variable is greater than or equal to the criteria
 
-```HTML
-...
-   data-display="{inputTest} is greater than or equal to 6;"
-...
+    ```HTML
+    ...
+       data-display="{inputTest} is greater than or equal to 6;"
+    ...
 ```
 
 * is less than or equal to - check that a variable is less than or equal to the criteria
 
-```HTML
-...
-   data-display="{inputTest} is less than or equal to 6;"
-...
+    ```HTML
+    ...
+       data-display="{inputTest} is less than or equal to 6;"
+    ...
 ```
 
 * is greater than - check that a variable is greater than the criteria
 
-```HTML
-...
-   data-display="{inputTest} is greater than 6;"
-...
+    ```HTML
+    ...
+       data-display="{inputTest} is greater than 6;"
+    ...
 ```
 
 * is less than - check that a variable is less than the criteria
 
-```HTML
-...
-   data-display="{inputTest} is less than 6;"
-...
-```
+    ```HTML
+    ...
+       data-display="{inputTest} is less than 6;"
+    ...
+    ```
 
 * is equal to - check that a variable is == to the criteria
 
-```HTML
-...
-   data-display="{inputTest} is equal to 6;"
-...
-```
+    ```HTML
+    ...
+       data-display="{inputTest} is equal to 6;"
+    ...
+    ```
 
 #### Extending the helper methods object:
 
 * The helper methods may be extended by providing an array of helpers in the options provided to $.fn.dataDisplay at init...
 
-```javascript
-...
-   $('#container').dataDisplay({
-       'funcs': {
-           'sum': {
-               rgx: 'sum\\({([^}]+)}\\)',
-               exec: function (field, ctx) {
+    ```javascript
+    ...
+       $('#container').dataDisplay({
+           'funcs': {
+               'sum': {
+                   rgx: 'sum\\({([^}]+)}\\)',
+                   exec: function (field, ctx) {
 
-                   ... sum all values against the given field ...
+                       ... sum all values against the given field ...
 
-                   return str;
+                       return str;
+                   }
                }
            }
-       }
-   });
-...
-```
+       });
+    ...
+    ```
 
 <h2 id="Syntax">Writing conditions and statements</h2>
 
@@ -231,62 +231,64 @@
 
 * A condition consists of {variables}, helper method calls (eg length()) and side-affects (any statements following a '::' after a condition (optional)).
 
-```HTML
-...
-    data-display="length({inputTest}) is greater than 6 ::
-        $this.css('background', '#000');"
-...
-```
+    ```HTML
+    ...
+        data-display="length({inputTest}) is greater than 6 ::
+            $this.css('background', '#000');"
+    ...
+    ```
 
 * Any side-affects should be defined after the condition, separated by a double-colon (::).<br/>
 Each condition may hold one or more side-affects where each side-affect is separated by a semicolon ';'.<br/>
 Each side-affect should be a jQuery function (.css, .data, .scrollTop... etc), the element is passed to the execution scope as $this ($this.css(...), $this.data(...), $this.scrollTop(...)... etc).
 
-```HTML
-...
-    data-display="length({inputTest}) is greater than 6 ::
-        $this.css('background', '#000'); $this.css('font-size', '16px');"
-...
-```
+    ```HTML
+    ...
+        data-display="length({inputTest}) is greater than 6 ::
+            $this.css('background', '#000'); $this.css('font-size', '16px');"
+    ...
+    ```
 
 * The data-display-resets attribute should undo any actions performed by the data-display condition(s).
 
-```HTML
-...
-    data-display="length({inputTest}) is greater than 6 ::
-        $this.css('background', '#000');"
-    data-display-resets="$this.css('background', '#fff');"
-...
-```
+    ```HTML
+    ...
+        data-display="length({inputTest}) is greater than 6 ::
+            $this.css('background', '#000');"
+        data-display-resets="$this.css('background', '#fff');"
+    ...
+    ```
+
 * Logical conditions can be grouped in brackets ({condition} == "value" &#124;&#124; {condition} == "value2")
-```HTML
-...
-    data-display="(length({inputTest}) is greater than 6 && length({inputTest}) is less than 12) ::
-        $this.css('background', '#000');"
-    data-display-resets="$this.css('background', '#fff');"
-...
-```
+
+    ```HTML
+    ...
+        data-display="(length({inputTest}) is greater than 6 && length({inputTest}) is less than 12) ::
+            $this.css('background', '#000');"
+        data-display-resets="$this.css('background', '#fff');"
+    ...
+    ```
 
 * If the condition does not define any side-affects, then it will instead control the display state (display: block) - the reverse action (\*-resets) is implied.
 
-```HTML
-...
-    data-display="(length({inputTest}) is greater than 6 && length({inputTest}) is less than 12);"
-...
-```
+    ```HTML
+    ...
+        data-display="(length({inputTest}) is greater than 6 && length({inputTest}) is less than 12);"
+    ...
+    ```
 
 * Multiple conditions may be defined against the same data-display attr by separating each condition with a double pipe (&#124;&#124;)
 
-```HTML
-...
-    data-display="
-        length({inputTest}) is greater than 6 ::
-            $this.css('background', '#000'); ||
-        length({inputTest}) is greater than 12 ::
-            $this.css('background', '#ddd');"
-    data-display-resets="$this.css('background', '#fff');"
-...
-```
+    ```HTML
+    ...
+        data-display="
+            length({inputTest}) is greater than 6 ::
+                $this.css('background', '#000'); ||
+            length({inputTest}) is greater than 12 ::
+                $this.css('background', '#ddd');"
+        data-display-resets="$this.css('background', '#fff');"
+    ...
+    ```
 
 <h2 id="License">License</h2>
 
