@@ -64,7 +64,7 @@
 
 <h2 id="Documentation">Documentation</h2>
 
-* [jquery.dataDisplay's documentation](https://assetinfo.github.io/jquery.dataDisplay/) has been generated using [jsDocs 3.5.3](https://github.com/jsdoc3/jsdoc) and the [minami 1.2.3](https://github.com/nijikokun/minami/) theme.
+* [jQuery.dataDisplay's documentation](https://assetinfo.github.io/jquery.dataDisplay/) has been generated using [jsDocs 3.5.3](https://github.com/jsdoc3/jsdoc) and the [minami 1.2.3](https://github.com/nijikokun/minami/) theme.
 
 <h2 id="Installing">Installing, building and testing</h2>
 
