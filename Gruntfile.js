@@ -71,10 +71,10 @@ module.exports = function(grunt) {
         },
         jasmine: {
             full: {
-                src: "dist/jquery.dataDisplay.optimised.js",
+                src: "src/js/jquery.dataDisplay.js",
                 options: {
                     specs: "spec/*[S|s]pec.js",
-                    vendor: ['spec/lib/waitsForAndRuns.js']
+                    vendor: ['bower_components/jquery/dist/jquery.js', 'spec/lib/waitsForAndRuns.js']
                 }
             }
         }

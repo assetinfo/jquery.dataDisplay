@@ -256,7 +256,7 @@
          * @class DataDisplay
          * @memberof $.fn.dataDisplay
          */
-        var DataDisplay = function (el, settings, funcs) {
+        var DataDisplay = function ($el, settings, funcs) {
             // assign internal scope to local obj
             var dataDisplay = this;
 
@@ -264,7 +264,7 @@
              * Initiate dataDisplay on the given element with the given settings and funcs
              *
              * @function DataDisplay.init
-             * @param {object} el the element that DataDisplay is being applied to
+             * @param {object} $el the element that DataDisplay is being applied to
              * @param {object} settings the settings being applied to this $el
              * @param {array}  settings.funcs provide an array of func methods to extend the built-in helper methods
              * @param {string} settings.eventName name to bind the events against
@@ -277,15 +277,15 @@
              *
              * @memberof DataDisplay
              */
-            dataDisplay.init = function (el, settings, funcs) {
+            dataDisplay.init = function ($el, settings, funcs) {
                 // associate properties the outer calling scope
                 var that = this;
                 // record the calling outer el to use as ctx internally
-                that.el = el;
+                that.$el = $el;
                 that.settings = settings;
                 that.funcs = funcs;
                 // initiate the conditions defined against this collection of elements
-                $(that.el).each(function () {
+                $(that.$el).each(function () {
                     // keep ref to the outer context to limit the inner scope
                     var $ctx = $(this);
                     // for each discovered element of given attribute in context apply the defined condition(s)
@@ -301,12 +301,12 @@
                                 that.conditions = [];
                             }
                             // apply the default state
-                            var applyResets = that.debounce(function (resets, fields, el, $ctx) {
-                                return that.applyResets(resets, fields, el, $ctx);
+                            var applyResets = that.debounce(function (resets, fields, $el, $ctx) {
+                                return that.applyResets(resets, fields, $el, $ctx);
                             });
                             // apply the main debounce logic
-                            var applyConditions = that.debounce(function (conditions, fields, el, $ctx) {
-                                return that.applyConditions(conditions, fields, el, $ctx);
+                            var applyConditions = that.debounce(function (conditions, fields, $el, $ctx) {
+                                return that.applyConditions(conditions, fields, $el, $ctx);
                             });
                             // backup the css for the given elm
                             var styles = (typeof $this.attr("style") !== 'undefined' ? $this.attr("style") : '');
@@ -408,19 +408,19 @@
              * @function DataDisplay.applyResets
              * @param {string} resets the reset statements defined against the element
              * @param {array} fields an array of all {variables} defined in the conditions string
-             * @param {object} el the element we are applying defaluts for
-             * @param {object} ctx the outer element we can use as context
+             * @param {object} $el the element we are applying defaluts for
+             * @param {object} $ctx the outer element we can use as context
              * @memberof DataDisplay
              */
-            dataDisplay.applyResets = function (resets, fields, el, $ctx) {
+            dataDisplay.applyResets = function (resets, fields, $el, $ctx) {
                 // default action is to hide the element
-                $(el, $ctx).hide();
+                $($el, $ctx).hide();
                 // for each field present in the conditions, replace its {var} with its value
-                resets = this.replaceFieldValHolders(resets, fields);
+                resets = this.replaceFieldValHolders(resets, fields, $ctx);
                 // apply resets as js functions against given el
                 var resolve = new Function('$this', (resets ? resets : ''));
                 // trigger with the given el
-                resolve(el);
+                resolve($el);
             };
 
             /**
@@ -429,11 +429,11 @@
              * @function DataDisplay.applyConditions
              * @param {string} conditions the conditions defined against the element
              * @param {array} fields an array of all {variables} defined in the conditions string
-             * @param {object} el the element we are applying defaluts for
-             * @param {object} ctx the outer element we can use as context
+             * @param {object} $el the element we are applying defaluts for
+             * @param {object} $ctx the outer element we can use as context
              * @memberof DataDisplay
              */
-            dataDisplay.applyConditions = function (conditions, fields, el, $ctx) {
+            dataDisplay.applyConditions = function (conditions, fields, $el, $ctx) {
                 // hold outer ctx;
                 var that = this;
                 // check for predefined functions by syntax (!empty, empty, length)
@@ -446,7 +446,7 @@
                     }
                 }
                 // for each field present in the conditions, replace its {var} with its value
-                conditions = that.replaceFieldValHolders(conditions, fields);
+                conditions = that.replaceFieldValHolders(conditions, fields, $ctx);
                 // allow for multiple side-effects in single conditions
                 // ... data-display="
                 //  {val} > 0; ||
@@ -464,10 +464,10 @@
                     // allow for default condition-met-action of showing
                     if (conditionalPartsSplit.length == 1) {
                         // allow for default condition-met-action of showing
-                        that.showOnCondition(conditionalParts[i], el);
+                        that.showOnCondition(conditionalParts[i], $el);
                     } else {
                         // carry out the single action as defined against the condition
-                        that.funcOnCondition(conditionalPartsSplit, el);
+                        that.funcOnCondition(conditionalPartsSplit, $el);
                     }
                 }
             };
@@ -477,10 +477,10 @@
              *
              * @function DataDisplay.showOnCondition
              * @param {string} condition the condition being considered
-             * @param {object} el the element we are applying the condition to
+             * @param {object} $el the element we are applying the condition to
              * @memberof DataDisplay
              */
-            dataDisplay.showOnCondition = function (conditions, el) {
+            dataDisplay.showOnCondition = function (conditions, $el) {
                 // strip final ';' from string before invoking
                 var conditions = conditions.replace(/;(\s+)?$/, '');
                 // check the condition and show/hide the el
@@ -488,7 +488,7 @@
                 // execute the condition and if true display the element
                 if (new Function(condition)() == true) {
                     // show the given element
-                    $(el).show();
+                    $($el).show();
                 }
             };
 
@@ -497,10 +497,10 @@
              *
              * @function DataDisplay.funcOnCondition
              * @param {array} conditionalParts a two part construct spliting the condition from the resolution funcs
-             * @param {object} el the element we are applying the condition to
+             * @param {object} $el the element we are applying the condition to
              * @memberof DataDisplay
              */
-            dataDisplay.funcOnCondition = function (conditionalParts, el) {
+            dataDisplay.funcOnCondition = function (conditionalParts, $el) {
                 // carry out the single action as defined against the condition
                 for (var i = 0; i &lt; conditionalParts.length; i++) {
                     // strip final ';' from string before invoking
@@ -513,19 +513,19 @@
                             // when the condition is satisified build and trigger the func
                             if (new Function(condition)() == true) {
                                 // default action is to show the element - implied so that it may be fully ommitted from the condition
-                                $(el).show();
+                                $($el).show();
                                 // create the function associated with this conditionsPart
                                 var outcomes = " return (" + (conditionalPartsSplit[j].length ? conditionalPartsSplit[j] : 'true') + ");";
                                 // apply the dataFunc aginst the given el
                                 var resolve = new Function('$this', outcomes);
                                 // trigger with the given el
-                                resolve(el);
+                                resolve($el);
                             }
                         }
                     }
                 }
             };
-            
+
             /**
              * this.findFields()&lt;br/>&lt;br/>Find the fields defined across the entire condition
              *
@@ -565,9 +565,10 @@
              * @function DataDisplay.replaceFieldValHolders
              * @param {string} condition the condition being considered
              * @param {string} fields the fields being replaced
+             * @param {object} $ctx the outer element we can use as context
              * @memberof DataDisplay
              */
-            dataDisplay.replaceFieldValHolders = function (conditions, fields) {
+            dataDisplay.replaceFieldValHolders = function (conditions, fields, $ctx) {
                 // hold outer ctx;
                 var that = this;
                 // ensure the fields are presented as an array
@@ -582,11 +583,11 @@
                     var fieldValue = '';
                     var parseVal = '';
                     // check that the given field has a value
-                    if (typeof $(fieldSelector + ':checked').val() !== "undefined") {
+                    if (typeof $(fieldSelector + ':checked', $ctx).val() !== "undefined") {
                         // first check for radio/checkbox - failover to inputs
-                        fieldValue = $(fieldSelector + ':checked').val();
+                        fieldValue = $(fieldSelector + ':checked', $ctx).val();
                     } else {
-                        fieldValue = $(fieldSelector).val();
+                        fieldValue = $(fieldSelector, $ctx).val();
                     }
                     // when value is present replace {var}
                     if (typeof fieldValue !== 'undefined') {
@@ -627,7 +628,7 @@
                 // hold outer ctx;
                 var that = this;
                 // destory each element (as-called) individually
-                $(that.el).each(function () {
+                $(that.$el).each(function () {
                     // keep ref to the outer context to limit the inner scope
                     var $ctx = $(this);
                     // find any options.condsAttr used in the call
@@ -657,14 +658,14 @@
                             .attr(that.settings.resetsAttr, resets);
                     });
                     // remove the data attr (removes all references to dataDisplay instance)
-                    $(that.el).removeData('dataDisplay');
+                    $ctx.removeData('dataDisplay');
                 });
                 // allow chainging on setup level methods
                 return this;
             };
 
             // call dataDisplay.init() on new dataDisplay()
-            return dataDisplay.init(el, settings, funcs);
+            return dataDisplay.init($el, settings, funcs);
         };
     }
 ));
@@ -680,7 +681,7 @@
 <br class="clear">
 
 <footer align="center">
-    Generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.3</a> on Wed Jul 19 2017 00:51:18 GMT+0100 (BST) using the Minami theme.
+    Generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.3</a> on Wed Jul 19 2017 03:17:27 GMT+0100 (BST) using the Minami theme.
      <br/> Copyright © 2014-2017 Graham Dixon, MML LTD - Assetinfo.</a>
 </footer>
 
