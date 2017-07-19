@@ -229,7 +229,7 @@
  -->
 #### Syntax
 
-* A condition consists of {variables}, helper method calls (eg length()) and side-affects (any statements following a '::' after a condition (optional)).
+* A condition consists of {variables}, helper method calls (eg length()) and side-effects (any statements following a '::' after a condition (optional)).
 
     ```HTML
     ...
@@ -238,8 +238,8 @@
     ...
     ```
 
-* Any side-affects should be defined after the condition, separated by a double-colon (::).<br/>
-Each condition may hold one or more side-affects where each side-affect is separated by a semicolon ';'.<br/>
+* Any side-effects should be defined after the condition, separated by a double-colon (::).<br/>
+Each condition may hold one or more side-effects where each side-affect is separated by a semicolon ';'.<br/>
 Each side-affect should be a jQuery function (.css, .data, .scrollTop... etc), the element is passed to the execution scope as $this ($this.css(...), $this.data(...), $this.scrollTop(...)... etc).
 
     ```HTML
@@ -269,7 +269,7 @@ Each side-affect should be a jQuery function (.css, .data, .scrollTop... etc), t
     ...
     ```
 
-* If the condition does not define any side-affects, then it will instead control the display state (display: block) - the reverse action (\*-resets) is implied.
+* If the condition does not define any side-effects, then it will instead control the display state (display: block) - the reverse action (\*-resets) is implied.
 
     ```HTML
     ...
