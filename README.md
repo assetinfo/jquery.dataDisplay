@@ -1,14 +1,25 @@
-# [jquery.dataDisplay](https://github.com/assetinfo/jquery.dataDisplay)         [![Build Status](https://travis-ci.org/assetinfo/jquery.dataDisplay.png)](https://travis-ci.org/assetinfo/jquery.dataDisplay)
+# [jQuery.dataDisplay.js](https://github.com/assetinfo/jquery.dataDisplay)  
 
-   >jquery.dataDisplay.js aids the developer in writing concise conditions against elements within a form based setting, in order to control the display of elements based on the state of a form.
+> A jQuery plugin that aids the developer in writing concise conditions against elements within a form based setting, in order to control the display of those elements based on the state of the form.
 
 --------
 
-## Demo
+[![Build Status](https://img.shields.io/travis/assetinfo/jquery.dataDisplay/master.svg)](https://travis-ci.org/assetinfo/jquery.dataDisplay)
+[![GitHub issues](https://img.shields.io/github/issues/assetinfo/jquery.dataDisplay.svg)](https://github.com/assetinfo/jquery.dataDisplay/issues)
+[![GitHub issues](https://img.shields.io/github/issues-closed/assetinfo/jquery.dataDisplay.svg)](https://github.com/assetinfo/jquery.dataDisplay/issues?utf8=%E2%9C%93&q=is%3Aissue%20is%3Aclosed%20)
+[![Download this repo](https://img.shields.io/github/downloads/assetinfo/jquery.dataDisplay/total.svg)](https://github.com/assetinfo/jquery.dataDisplay/archive/master.zip)
+[![License](https://img.shields.io/github/license/assetinfo/jquery.dataDisplay.svg)](https://github.com/assetinfo/jquery.dataDisplay/blob/master/LICENSE)
+[![Fork this repo](https://img.shields.io/github/forks/assetinfo/jquery.dataDisplay.svg?label=Fork)](http://github.com/assetinfo/jquery.dataDisplay/fork)
+[![Star this repo](https://img.shields.io/github/stars/assetinfo/jquery.dataDisplay.svg?label=Star)](http://github.com/assetinfo/jquery.dataDisplay)
+[![Watch this repo](https://img.shields.io/github/watchers/assetinfo/jquery.dataDisplay.svg?label=Watch)](http://github.com/assetinfo/jquery.dataDisplay)
+
+<h2 id="Demo">Demo</h2>
+
 
 * [Demo on jsfiddle](https://jsfiddle.net/graydixon/tchmmn27/).
 
-## Initialising a form with conditionally displayed elements
+<h2 id="Initialising">Initialising a form with conditionally displayed elements</h2>
+
 
 * A dataDisplay instance is initialised against a div which contains at least one element that has data-display tags:
 
@@ -51,11 +62,11 @@
     ...
     ```
 
-## Documentation
+<h2 id="Documentation">Documentation</h2>
 
 * [jquery.dataDisplay's documentation](https://assetinfo.github.io/jquery.dataDisplay/) has been generated using [jsDocs 3.5.3](https://github.com/jsdoc3/jsdoc) and the [minami 1.2.3](https://github.com/nijikokun/minami/) theme.
 
-## Installing, building and testing
+<h2 id="Installing">Installing, building and testing</h2>
 
 1. [Download](https://github.com/assetinfo/jquery.dataDisplay/archive/master.zip) or clone this repo...
    ```
@@ -118,7 +129,8 @@
    });
    ```
 
-## Built-in helper methods:
+<h2 id="Helpers">Built-in helper methods</h2>
+
 
 * !empty() - check if a variable is NOT empty
 
@@ -206,7 +218,7 @@
 ...
 ```
 
-## Writing conditions and statements
+<h2 id="Syntax">Writing conditions and statements</h2>
 
 <!-- allow for multiple side-effects in single conditions
  ... data-display="
@@ -276,8 +288,8 @@ Each side-affect should be a jQuery function (.css, .data, .scrollTop... etc), t
 ...
 ```
 
-## License
+<h2 id="License">License</h2>
   * [Licensed](https://github.com/assetinfo/jquery.dataDisplay/blob/master/LICENSE) under the MIT License (MIT).
 
-## Contact us
+<h2 id="Contact">Contact us</h2>
  * [Contact us](mailto:gdixon@assetinfo.co.uk?Subject=jQuery.dataDisplay%20Enquiry...) if you need any further information or guidance (email: gdixon@assetinfo.co.uk).

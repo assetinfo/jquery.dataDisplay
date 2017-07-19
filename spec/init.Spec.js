@@ -5,7 +5,7 @@ describe("Initialise a dataDisplay div with a single condition (based on the sta
         // initiate against the #container element
         $('#test1').dataDisplay();
     });
-    
+
     it("assert that the dataDisplay instance has been added", function() {
         // init is a function if a dataDisplay instance is discovered
         expect((typeof $('#test1').dataDisplay().init === "function")).toBe(true);
@@ -112,11 +112,6 @@ describe("Initialise a dataDisplay div with a single condition and multiple side
         $('body').append('<div id="test3"><input name="inputTest" type="value"/><div class="dataDisplay" data-display="{inputTest} == \'testing\' :: $this.css(\'color\', \'rgb(0, 0, 255)\'); $this.attr(\'dataDisplayState\', \'true\');" data-display-resets="$this.css(\'color\', \'rgb(0, 0, 0)\'); $this.attr(\'dataDisplayState\', \'false\');"><a>Test</a></div></div>');
         // initiate against the #container element
         $('#test3').dataDisplay();
-    });
-
-    it("assert that the dataDisplay instance has been added", function() {
-        // init is a function if a dataDisplay instance is discovered
-        expect((typeof $('#test3').dataDisplay().init === "function")).toBe(true);
     });
 
     it("element will be hidden if the data-display-resets have been called", function() {

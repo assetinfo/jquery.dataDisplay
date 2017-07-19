@@ -58,6 +58,7 @@ module.exports = function(grunt) {
         },
         jsdoc: {
             dist: {
+                readme: 'README.md',
                 src: ['src/js/*.js', 'README.md'],
                 options: {
                     encoding: "utf8",

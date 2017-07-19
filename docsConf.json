@@ -1,26 +1,75 @@
 {
-  "tags": {
-    "allowUnknownTags": true
-  },
-  "source": {
-    "includePattern": ".+\\.js(doc)?$",
-    "excludePattern": "(^|\\/|\\\\)_"
-  },
-  "plugins": [],
-  "templates": {
-    "cleverLinks": false,
-    "monospaceLinks": false,
-    "useLongnameInNav": false,
-    "showInheritedInNav": true,
-    "default": {
-      "outputSourceFiles": true
+    "tags": {
+        "allowUnknownTags": true
     },
-    "systemName"      : "jquery.dataDisplay",
-    "footer"          : "",
-    "copyright"       : "Copyright © 2014-2017 Graham Dixon, MML LTD - Assetinfo.</a>",
-    "navType"         : "vertical",
-    "linenums"        : true,
-    "collapseSymbols" : false,
-    "inverseNav"      : true
-  }
+    "source": {
+        "includePattern": ".+\\.js(doc)?$",
+        "excludePattern": "(^|\\/|\\\\)_"
+    },
+    "plugins": [],
+    "extraNavDetails": [{
+            "id": "Demo",
+            "name": "Demo",
+            "longname": "Demo",
+            "kind": "-"
+        },
+        {
+            "id": "Initialising",
+            "name": "Initialising",
+            "longname": "Initialising",
+            "kind": "-"
+        },
+        {
+            "id": "Documentation",
+            "name": "Documentation",
+            "longname": "Documentation",
+            "kind": "-"
+        },
+        {
+            "id": "Installing",
+            "name": "Installing, building and testing",
+            "longname": "Installing",
+            "kind": "-"
+        },
+        {
+            "id": "Helpers",
+            "name": "Built-in helper methods",
+            "longname": "Helpers",
+            "kind": "-"
+        },
+        {
+            "id": "Syntax",
+            "name": "Writing Conditions",
+            "longname": "Syntax",
+            "kind": "-"
+        },
+        {
+            "id": "License",
+            "name": "License",
+            "longname": "License",
+            "kind": "-"
+        },
+        {
+            "id": "Contact",
+            "name": "Contact us",
+            "longname": "Contact",
+            "kind": "-"
+        }
+    ],
+    "templates": {
+        "cleverLinks": false,
+        "monospaceLinks": false,
+        "useLongnameInNav": false,
+        "showInheritedInNav": true,
+        "default": {
+            "outputSourceFiles": true
+        },
+        "systemName": "jquery.dataDisplay",
+        "footer": "",
+        "copyright": "Copyright © 2014-2017 Graham Dixon, MML LTD - Assetinfo.</a>",
+        "navType": "vertical",
+        "linenums": true,
+        "collapseSymbols": false,
+        "inverseNav": true
+    }
 }
