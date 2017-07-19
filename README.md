@@ -9,9 +9,9 @@
 [![GitHub issues](https://img.shields.io/github/issues-closed/assetinfo/jquery.dataDisplay.svg)](https://github.com/assetinfo/jquery.dataDisplay/issues?utf8=%E2%9C%93&q=is%3Aissue%20is%3Aclosed%20)
 [![Download this repo](https://img.shields.io/github/downloads/assetinfo/jquery.dataDisplay/total.svg)](https://github.com/assetinfo/jquery.dataDisplay/archive/master.zip)
 [![License](https://img.shields.io/github/license/assetinfo/jquery.dataDisplay.svg)](https://github.com/assetinfo/jquery.dataDisplay/blob/master/LICENSE)
+[![Watch this repo](https://img.shields.io/github/watchers/assetinfo/jquery.dataDisplay.svg?label=Watch)](http://github.com/assetinfo/jquery.dataDisplay/subscription)
+[![Star this repo](https://img.shields.io/github/stars/assetinfo/jquery.dataDisplay.svg?label=Star)](http://github.com/assetinfo/jquery.dataDisplay/stargazers)
 [![Fork this repo](https://img.shields.io/github/forks/assetinfo/jquery.dataDisplay.svg?label=Fork)](http://github.com/assetinfo/jquery.dataDisplay/fork)
-[![Star this repo](https://img.shields.io/github/stars/assetinfo/jquery.dataDisplay.svg?label=Star)](http://github.com/assetinfo/jquery.dataDisplay)
-[![Watch this repo](https://img.shields.io/github/watchers/assetinfo/jquery.dataDisplay.svg?label=Watch)](http://github.com/assetinfo/jquery.dataDisplay)
 
 <h2 id="Demo">Demo</h2>
 
