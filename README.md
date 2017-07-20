@@ -28,7 +28,7 @@
     ...
         <div id="container">
             <input name="inputTest" type="value">
-            <div data-display="{inputTest} == 'testing';"
+            <div data-display="{inputTest} == 'test';"
                 <a>Test</a>
             </div>
         </div>
