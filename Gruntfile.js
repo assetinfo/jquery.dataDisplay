@@ -7,8 +7,8 @@ module.exports = function(grunt) {
             options: {
                 banner: '/*! \n' +
                         ' * Script: jQuery.dataDisplay.js \n' +
-                        ' * Description: <%= pkg.description %>  \n' +
-                        ' * Copyright: Copyright (c) 2014-' + (new Date()).getFullYear() + ' Graham Dixon - http://gdixon.co.uk/  \n' +
+                        ' * Description: <%= pkg.description %> \n' +
+                        ' * Copyright: Copyright (c) '+ (new Date()).getFullYear() + ' Assetinfo (a trading style of Money Marketplace LTD) \n' +
                         ' * Author: GDixon  \n' +
                         ' * Email: gdixon@assetinfo.co.uk  \n' +
                         ' * Licensed: MIT \n' +

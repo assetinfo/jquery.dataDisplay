@@ -27,7 +27,7 @@
         },
         {
             "id": "Installing",
-            "name": "Installing, building and testing",
+            "name": "Installing, Building and Testing",
             "longname": "Installing",
             "kind": "-"
         },
@@ -44,15 +44,15 @@
             "kind": "-"
         },
         {
-            "id": "License",
-            "name": "License",
-            "longname": "License",
+            "id": "Contribute",
+            "name": "Contribute",
+            "longname": "Contribute",
             "kind": "-"
         },
         {
-            "id": "Contact",
-            "name": "Contact us",
-            "longname": "Contact",
+            "id": "License",
+            "name": "License",
+            "longname": "License",
             "kind": "-"
         }
     ],
@@ -66,7 +66,7 @@
         },
         "systemName": "jquery.dataDisplay",
         "footer": "",
-        "copyright": "Copyright © 2014-2017 Graham Dixon, MML LTD - Assetinfo.</a>",
+        "copyright": "Copyright © 2017 Assetinfo (a trading style of Money Marketplace LTD).</a>",
         "navType": "vertical",
         "linenums": true,
         "collapseSymbols": false,

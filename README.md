@@ -24,14 +24,14 @@
 
 For each conditionally displayed element, all conditions are to be defined against a "data-display" tag, using a [syntax](#Syntax) that will be compiled into appropriate javascript closures each time the referenced inputs' state changes.
 
-Each time the state changes, any rules defined inside the "data-display-resets" tag will be executed before the closures to ensure only the appropriate side-effects are applied for the given state.
+Each time the state changes, any rules defined inside the "data-display-resets" tag will be executed before the "data-display" closures to ensure only the appropriate side-effects are applied for the given state.
 
 * HTML
 ```HTML
 ...
     <div id="container">
-        <input name="inputTest" type="value">
-        <div data-display="{inputTest} == 'test';"
+        <input name="input" type="value">
+        <div data-display="{input} == 'test';"
             <a>Test</a>
         </div>
     </div>
@@ -69,7 +69,7 @@ Each time the state changes, any rules defined inside the "data-display-resets" 
 
 * [jQuery.dataDisplay's documentation](https://assetinfo.github.io/jquery.dataDisplay/) has been generated using [jsDoc 3.5.3](https://github.com/jsdoc3/jsdoc) and a modified version of Nijiko Yonskai's [minami 1.2.3](https://github.com/gdixon/minami/) theme.
 
-<h2 id="Installing">Installing, building and testing</h2>
+<h2 id="Installing">Installing, Building and Testing</h2>
 
 1. [Download](https://github.com/assetinfo/jquery.dataDisplay/archive/master.zip) or clone this repo...
    ```
@@ -143,11 +143,11 @@ Each time the state changes, any rules defined inside the "data-display-resets" 
  -->
 #### Syntax
 
-* A condition consists of {variables}, optional [helper method calls](#Helpers) (eg length()) and optional side-effects (any statements following a '::' after a condition).
+* A condition consists of {variables}, optional [helper method calls](#Helpers) (eg length()) and optional side-effects (any statements following a double-colon (::) after a condition).
 
     ```HTML
     ...
-        data-display="{inputTest} == 'test' ::
+        data-display="{input} == 'test' ::
             $this.css('background', '#000');"
     ...
     ```
@@ -158,7 +158,7 @@ Each side-effect should call a function against the $element which is passed to 
 
     ```HTML
     ...
-        data-display="{inputTest} == 'test' ::
+        data-display="{input} == 'test' ::
             $this.css('background', '#000'); $this.css('font-size', '16px');"
     ...
     ```
@@ -167,17 +167,17 @@ Each side-effect should call a function against the $element which is passed to 
 
     ```HTML
     ...
-        data-display="{inputTest} == 'test' ::
-            $this.css('background', '#000');"
-        data-display-resets="$this.css('background', '#fff');"
+        data-display="{input} == 'test' ::
+            $this.css('background', '#000'); $this.css('font-size', '16px');"
+        data-display-resets="$this.css('background', '#fff'); $this.css('font-size', '12px');"
     ...
     ```
 
-* Logical conditions can be grouped in brackets ({condition} == "value" &#124;&#124; {condition} == "value2")
+* Logical conditions can be grouped in brackets ({input} == "value" &#124;&#124; {input} == "value2")
 
     ```HTML
     ...
-        data-display="{inputTest} == 'value' && ({inputTest2} == 'test' || {inputTest2} == 'testing') ::
+        data-display="{input} == 'value' && ({input2} == 'test' || {input2} == 'testing') ::
             $this.css('background', '#000');"
         data-display-resets="$this.css('background', '#fff');"
     ...
@@ -187,7 +187,7 @@ Each side-effect should call a function against the $element which is passed to 
 
     ```HTML
     ...
-        data-display="({inputTest} == "test" || {inputTest} == "testing");"
+        data-display="({input} == "test" || {input} == "testing");"
     ...
     ```
 
@@ -196,9 +196,9 @@ Each side-effect should call a function against the $element which is passed to 
     ```HTML
     ...
         data-display="
-            {inputTest} == 'test' ::
+            {input} == 'test' ::
                 $this.css('background', '#000'); ||
-            {inputTest} == 'testing' ::
+            {input} == 'testing' ::
                 $this.css('background', '#ddd');"
         data-display-resets="$this.css('background', '#fff');"
     ...
@@ -206,11 +206,11 @@ Each side-effect should call a function against the $element which is passed to 
 
 <h2 id="Helpers">Built-in helper methods</h2>
 
-* **{...}** - Any string wrapped inside of '{...}' will be replaced with the value associated with the input that has the corresponding name='...' tag.
+* **{...}** - Any value wrapped inside of '{...}' will be replaced with the value associated with the input that has the corresponding name='...' tag.
 
     ```HTML
     ...
-       data-display="{inputTest} == "value";"
+       data-display="{input} == "value";"
     ...
     ```
 
@@ -218,7 +218,7 @@ Each side-effect should call a function against the $element which is passed to 
 
     ```HTML
     ...
-       data-display="!empty({inputTest});"
+       data-display="!empty({input});"
     ...
     ```
 
@@ -226,7 +226,7 @@ Each side-effect should call a function against the $element which is passed to 
 
     ```HTML
     ...
-       data-display="empty({inputTest});"
+       data-display="empty({input});"
     ...
     ```
 
@@ -234,7 +234,7 @@ Each side-effect should call a function against the $element which is passed to 
 
     ```HTML
     ...
-       data-display="length({inputTest}) > 6;"
+       data-display="length({input}) > 6;"
     ...
     ```
 
@@ -242,7 +242,7 @@ Each side-effect should call a function against the $element which is passed to 
 
     ```HTML
     ...
-       data-display="{inputTest} is greater than or equal to 6;"
+       data-display="{input} is greater than or equal to 6;"
     ...
     ```
 
@@ -250,7 +250,7 @@ Each side-effect should call a function against the $element which is passed to 
 
     ```HTML
     ...
-       data-display="{inputTest} is less than or equal to 6;"
+       data-display="{input} is less than or equal to 6;"
     ...
     ```
 
@@ -258,7 +258,7 @@ Each side-effect should call a function against the $element which is passed to 
 
     ```HTML
     ...
-       data-display="{inputTest} is greater than 6;"
+       data-display="{input} is greater than 6;"
     ...
     ```
 
@@ -266,7 +266,7 @@ Each side-effect should call a function against the $element which is passed to 
 
     ```HTML
     ...
-       data-display="{inputTest} is less than 6;"
+       data-display="{input} is less than 6;"
     ...
     ```
 
@@ -274,7 +274,7 @@ Each side-effect should call a function against the $element which is passed to 
 
     ```HTML
     ...
-       data-display="{inputTest} is equal to 6;"
+       data-display="{input} is equal to 6;"
     ...
     ```
 
@@ -302,10 +302,34 @@ Each side-effect should call a function against the $element which is passed to 
     ...
     ```
 
+<h2 id="Contribute">Contribute</h2>
+
+* Fork, make the appropriate changes, then create a pull request.
+* If you're planning on adding a feature, please create an issue first detailing what you think is missing.
+
+Otherwise your changes may be rejected.
+
 <h2 id="License">License</h2>
 
-* [Licensed](https://github.com/assetinfo/jquery.dataDisplay/blob/master/LICENSE) under the MIT License (MIT).
+The MIT License (MIT)
 
-<h2 id="Contact">Contact us</h2>
-
+Copyright (c) 2017 Assetinfo (a trading style of Money Marketplace LTD)
 * [Contact us](mailto:gdixon@assetinfo.co.uk?Subject=jQuery.dataDisplay%20Enquiry...) if you need any further information or guidance (email: gdixon@assetinfo.co.uk).
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
