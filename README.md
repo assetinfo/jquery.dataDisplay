@@ -24,7 +24,7 @@
 
 For each conditionally displayed element, all conditions are to be defined against a "data-display" tag, using a [syntax](#Syntax) that will be compiled into appropriate javascript closures each time the referenced inputs' state changes.
 
-Each time the state changes on any of the inputs used in a condition, the rules defined inside the "data-display-resets" tag will be called before the "data-display" closures are executed, to ensure only the appropriate side-effects are applied for the given state.
+Each time the state changes on any of the inputs used in a condition, the rules defined inside the "data-display-resets" tag will be called prior to the "data-display" closures being executed, to ensure only the appropriate side-effects are applied for the given state.
 
 * HTML
 ```HTML
