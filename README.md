@@ -22,7 +22,7 @@
 
 [$.fn.dataDisplay](https://assetinfo.github.io/jquery.dataDisplay/$.fn.dataDisplay.html) (``` $(...).dataDisplay() ```) is invoked against a container which contains both the inputs and the elements beings controlled.
 
-For each conditionally displayed element, all conditions are to be defined against a "data-display" tag, using a [syntax](https://assetinfo.github.io/jquery.dataDisplay/index.html#Syntax) that will be compiled into appropriate javascript closures each time the referenced inputs' state changes.
+For each conditionally displayed element, all conditions are to be defined against a "data-display" tag, using a [syntax](#Syntax) that will be compiled into appropriate javascript closures each time the referenced inputs' state changes.
 
 Each time the state changes, any rules defined inside the "data-display-resets" tag will be executed before the closures to ensure only the appropriate side-effects are applied for the given state.
 
@@ -143,7 +143,7 @@ Each time the state changes, any rules defined inside the "data-display-resets" 
  -->
 #### Syntax
 
-* A condition consists of {variables}, optional [helper method calls](https://assetinfo.github.io/jquery.dataDisplay/index.html#Helpers) (eg length()) and optional side-effects (any statements following a '::' after a condition).
+* A condition consists of {variables}, optional [helper method calls](#Helpers) (eg length()) and optional side-effects (any statements following a '::' after a condition).
 
     ```HTML
     ...
