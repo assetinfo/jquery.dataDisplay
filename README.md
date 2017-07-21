@@ -314,7 +314,6 @@ Otherwise your changes may be rejected.
 The MIT License (MIT)
 
 Copyright (c) 2017 Assetinfo (a trading style of Money Marketplace LTD)
-* [Contact us](mailto:gdixon@assetinfo.co.uk?Subject=jQuery.dataDisplay%20Enquiry...) if you need any further information or guidance (email: gdixon@assetinfo.co.uk).
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
