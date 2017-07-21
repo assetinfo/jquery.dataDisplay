@@ -18,49 +18,52 @@
 
 * [Demo on jsfiddle](https://jsfiddle.net/graydixon/tchmmn27/).
 
-<h2 id="Initialising">Initialising a form with conditionally displayed elements</h2>
+<h2 id="QuickStart">Quick start</h2>
 
+[$.fn.dataDisplay](https://assetinfo.github.io/jquery.dataDisplay/$.fn.dataDisplay.html) (``` $(...).dataDisplay() ```) is invoked against a container which contains both the inputs and the elements beings controlled.
 
-* A dataDisplay instance is initialised against a div which contains at least one element that has data-display tags:
+For each conditionally displayed element, all conditions are to be defined against a "data-display" tag, using a [syntax](https://assetinfo.github.io/jquery.dataDisplay/index.html#Syntax) that will be compiled into appropriate javascript closures each time the referenced inputs' state changes.
 
-    * HTML
-    ```HTML
-    ...
-        <div id="container">
-            <input name="inputTest" type="value">
-            <div data-display="{inputTest} == 'test';"
-                <a>Test</a>
-            </div>
+Each time the state changes, any rules defined inside the "data-display-resets" tag will be executed before the closures to ensure only the appropriate side-effects are applied for the given state.
+
+* HTML
+```HTML
+...
+    <div id="container">
+        <input name="inputTest" type="value">
+        <div data-display="{inputTest} == 'test';"
+            <a>Test</a>
         </div>
-    ...
-    ```
+    </div>
+...
+```
 
-    * Javascript
-    ```javascript
-    ...
-        var dataDisplay = $('#container').dataDisplay({...options...});
-    ...
-    ```
+* Javascript
+```javascript
+...
+    var dataDisplay = $('#container').dataDisplay({...options...});
+...
+```
 
-    * Options
-    ```javascript
-    ...
-        // provide an array of func methods to extend the built-in helper methods
-        funcs: {},
-        // name to bind the events against
-        eventName: '.dataDisplay',
-        // data-attribute to bind DataDisplay instance against (against the $el)
-        dataAttr: 'dataDisplay',
-        // attribute holding the conditions on first-load
-        condsAttr: 'data-display',
-        // attribute holding resets on first load (defined as jquery statements against $this)
-        resetsAttr: 'data-display-resets',
-        // should the plugin fire during the setup phase?
-        initFire: true,
-        // should the plugin fire on key events?
-        keyEventsFire: true
-    ...
-    ```
+* Options
+```javascript
+...
+    // provide an array of func methods to extend the built-in helper methods
+    funcs: {},
+    // name to bind the events against
+    eventName: '.dataDisplay',
+    // data-attribute to bind DataDisplay instance against (against the $el)
+    dataAttr: 'dataDisplay',
+    // attribute holding the conditions on first-load
+    condsAttr: 'data-display',
+    // attribute holding resets on first load (defined as jquery statements against $this)
+    resetsAttr: 'data-display-resets',
+    // should the plugin fire during the setup phase?
+    initFire: true,
+    // should the plugin fire on key events?
+    keyEventsFire: true
+...
+```
 
 <h2 id="Documentation">Documentation</h2>
 
@@ -129,10 +132,89 @@
    });
    ```
 
+<h2 id="Syntax">Writing conditions and statements</h2>
+
+<!-- allow for multiple side-effects in single conditions
+ ... data-display="
+  {val} > 0; &#124;&#124;
+  {val} < 1 :: $(var).css('background','#bdbdbd'); &#124;&#124;
+  {val} > 1 && {val} < 2 :: $(var).css('background','#bdbdbd');
+ " ...
+ -->
+#### Syntax
+
+* A condition consists of {variables}, optional [helper method calls](https://assetinfo.github.io/jquery.dataDisplay/index.html#Helpers) (eg length()) and optional side-effects (any statements following a '::' after a condition).
+
+    ```HTML
+    ...
+        data-display="{inputTest} == 'test' ::
+            $this.css('background', '#000');"
+    ...
+    ```
+
+* Any side-effects should be defined after the condition, separated by a double-colon (::).<br/>
+Each condition may hold one or more side-effects where each side-effect is separated by a semicolon ';'.<br/>
+Each side-effect should call a function against the $element which is passed to the closures scope as $this ($this.css(...), $this.data(...), $this.scrollTop(...)... etc).
+
+    ```HTML
+    ...
+        data-display="{inputTest} == 'test' ::
+            $this.css('background', '#000'); $this.css('font-size', '16px');"
+    ...
+    ```
+
+* The data-display-resets attribute should undo any actions performed by the data-display condition(s).
+
+    ```HTML
+    ...
+        data-display="{inputTest} == 'test' ::
+            $this.css('background', '#000');"
+        data-display-resets="$this.css('background', '#fff');"
+    ...
+    ```
+
+* Logical conditions can be grouped in brackets ({condition} == "value" &#124;&#124; {condition} == "value2")
+
+    ```HTML
+    ...
+        data-display="{inputTest} == 'value' && ({inputTest2} == 'test' || {inputTest2} == 'testing') ::
+            $this.css('background', '#000');"
+        data-display-resets="$this.css('background', '#fff');"
+    ...
+    ```
+
+* If the condition does not define any side-effects, then it will instead control the display state (display: block) - the reverse action (\*-resets) is implied.
+
+    ```HTML
+    ...
+        data-display="({inputTest} == "test" || {inputTest} == "testing");"
+    ...
+    ```
+
+* Multiple conditions may be defined against the same data-display attr by separating each condition with a double pipe (&#124;&#124;)
+
+    ```HTML
+    ...
+        data-display="
+            {inputTest} == 'test' ::
+                $this.css('background', '#000'); ||
+            {inputTest} == 'testing' ::
+                $this.css('background', '#ddd');"
+        data-display-resets="$this.css('background', '#fff');"
+    ...
+    ```
+
 <h2 id="Helpers">Built-in helper methods</h2>
 
+* **{...}** - Any string wrapped inside of '{...}' will be replaced with the value associated with the input that has the corresponding name='...' tag.
 
-* !empty() - check if a variable is NOT empty
+    ```HTML
+    ...
+       data-display="{inputTest} == "value";"
+    ...
+    ```
+
+* **!empty({...})** - returns "true" (=="true") if the given variable is NOT empty, else "false" (=="true")
 
     ```HTML
     ...
@@ -140,7 +222,7 @@
     ...
     ```
 
-* empty() - check if a variable is empty
+* **empty({...})** - returns "true" (=="true") if the given variable is empty, else "false" (=="true")
 
     ```HTML
     ...
@@ -148,7 +230,7 @@
     ...
     ```
 
-* length() - check the length of a variable
+* **length({...})** - returns the length of the given variable
 
     ```HTML
     ...
@@ -156,7 +238,7 @@
     ...
     ```
 
-* is greater than or equal to - check that a variable is greater than or equal to the criteria
+* **is greater than or equal to** - returns the ">=" symbol (to avoid reserved characters in tags)
 
     ```HTML
     ...
@@ -164,7 +246,7 @@
     ...
     ```
 
-* is less than or equal to - check that a variable is less than or equal to the criteria
+* **is less than or equal to** - returns the "<=" symbol (to avoid reserved characters in tags)
 
     ```HTML
     ...
@@ -172,7 +254,7 @@
     ...
     ```
 
-* is greater than - check that a variable is greater than the criteria
+* **is greater than** - returns the ">" symbol (to avoid reserved characters in tags)
 
     ```HTML
     ...
@@ -180,7 +262,7 @@
     ...
     ```
 
-* is less than - check that a variable is less than the criteria
+* **is less than** - returns the "<" symbol (to avoid reserved characters in tags)
 
     ```HTML
     ...
@@ -188,7 +270,7 @@
     ...
     ```
 
-* is equal to - check that a variable is == to the criteria
+* **is equal to** - returns the "==" symbols (in order to cover all operators)
 
     ```HTML
     ...
@@ -205,88 +287,18 @@
        $('#container').dataDisplay({
            'funcs': {
                'sum': {
+                   // define a regex pattern to match the desired expression...
                    rgx: 'sum\\({([^}]+)}\\)',
+                   // and a function which will return the desired process as a string which will replace any matching groups
                    exec: function (field, ctx) {
 
-                       ... sum all values against the given field ...
+                       var str = ... sum all values against the given field ...
 
                        return str;
                    }
                }
            }
        });
-    ...
-    ```
-
-<h2 id="Syntax">Writing conditions and statements</h2>
-
-<!-- allow for multiple side-effects in single conditions
- ... data-display="
-  {val} > 0; &#124;&#124;
-  {val} < 1 :: $(var).css('background','#bdbdbd'); &#124;&#124;
-  {val} > 1 && {val} < 2 :: $(var).css('background','#bdbdbd');
- " ...
- -->
-#### Syntax
-
-* A condition consists of {variables}, helper method calls (eg length()) and side-effects (any statements following a '::' after a condition (optional)).
-
-    ```HTML
-    ...
-        data-display="length({inputTest}) is greater than 6 ::
-            $this.css('background', '#000');"
-    ...
-    ```
-
-* Any side-effects should be defined after the condition, separated by a double-colon (::).<br/>
-Each condition may hold one or more side-effects where each side-affect is separated by a semicolon ';'.<br/>
-Each side-affect should be a jQuery function (.css, .data, .scrollTop... etc), the element is passed to the execution scope as $this ($this.css(...), $this.data(...), $this.scrollTop(...)... etc).
-
-    ```HTML
-    ...
-        data-display="length({inputTest}) is greater than 6 ::
-            $this.css('background', '#000'); $this.css('font-size', '16px');"
-    ...
-    ```
-
-* The data-display-resets attribute should undo any actions performed by the data-display condition(s).
-
-    ```HTML
-    ...
-        data-display="length({inputTest}) is greater than 6 ::
-            $this.css('background', '#000');"
-        data-display-resets="$this.css('background', '#fff');"
-    ...
-    ```
-
-* Logical conditions can be grouped in brackets ({condition} == "value" &#124;&#124; {condition} == "value2")
-
-    ```HTML
-    ...
-        data-display="(length({inputTest}) is greater than 6 && length({inputTest}) is less than 12) ::
-            $this.css('background', '#000');"
-        data-display-resets="$this.css('background', '#fff');"
-    ...
-    ```
-
-* If the condition does not define any side-effects, then it will instead control the display state (display: block) - the reverse action (\*-resets) is implied.
-
-    ```HTML
-    ...
-        data-display="(length({inputTest}) is greater than 6 && length({inputTest}) is less than 12);"
-    ...
-    ```
-
-* Multiple conditions may be defined against the same data-display attr by separating each condition with a double pipe (&#124;&#124;)
-
-    ```HTML
-    ...
-        data-display="
-            length({inputTest}) is greater than 6 ::
-                $this.css('background', '#000'); ||
-            length({inputTest}) is greater than 12 ::
-                $this.css('background', '#ddd');"
-        data-display-resets="$this.css('background', '#fff');"
     ...
     ```
 

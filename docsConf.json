@@ -14,9 +14,9 @@
             "kind": "-"
         },
         {
-            "id": "Initialising",
-            "name": "Initialising",
-            "longname": "Initialising",
+            "id": "QuickStart",
+            "name": "Quick Start",
+            "longname": "QuickStart",
             "kind": "-"
         },
         {
@@ -32,15 +32,15 @@
             "kind": "-"
         },
         {
-            "id": "Helpers",
-            "name": "Built-in helper methods",
-            "longname": "Helpers",
-            "kind": "-"
-        },
-        {
             "id": "Syntax",
             "name": "Writing Conditions",
             "longname": "Syntax",
+            "kind": "-"
+        },
+        {
+            "id": "Helpers",
+            "name": "Built-in helpers",
+            "longname": "Helpers",
             "kind": "-"
         },
         {
