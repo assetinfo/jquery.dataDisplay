@@ -173,6 +173,7 @@ section {
     font-size: 0.85em;
 }
 .readme table {
+    width: 100%;
     margin-bottom: 1em;
     border-collapse: collapse;
     border-spacing: 0;

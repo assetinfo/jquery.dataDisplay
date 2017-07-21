@@ -45,25 +45,17 @@ Each time the state changes, any rules defined inside the "data-display-resets" 
 ...
 ```
 
-* Options
-```javascript
-...
-    // provide an array of func methods to extend the built-in helper methods
-    funcs: {},
-    // name to bind the events against
-    eventName: '.dataDisplay',
-    // data-attribute to bind DataDisplay instance against (against the $el)
-    dataAttr: 'dataDisplay',
-    // attribute holding the conditions on first-load
-    condsAttr: 'data-display',
-    // attribute holding resets on first load (defined as jquery statements against $this)
-    resetsAttr: 'data-display-resets',
-    // should the plugin fire during the setup phase?
-    initFire: true,
-    // should the plugin fire on key events?
-    keyEventsFire: true
-...
-```
+<h2 id="Options">Options</h2>
+
+Name | Type | Default | Description
+----|------|---- | ----
+funcs | array | {} | an array of func methods used to extend the built-in helper methods
+eventName | string | '.dataDisplay' | name to bind the events against
+dataAttr | string | 'dataDisplay' | data-attribute to bind DataDisplay instance to (against the $el)
+condsAttr | string | 'data-display' | attribute holding the conditions on first-load
+resetsAttr | string | 'data-display-resets' | attribute holding resets on first load (defined as jquery statements against $this)
+initFire | bool | true | should the conditions be applied when the DataDisplay instance is created?
+keyEventsFire | bool | true | should DataDisplay recheck conditions on keyup events?
 
 <h2 id="Documentation">Documentation</h2>
 

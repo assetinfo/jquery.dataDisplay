@@ -20,6 +20,12 @@
             "kind": "-"
         },
         {
+            "id": "Options",
+            "name": "Options",
+            "longname": "Options",
+            "kind": "-"
+        },
+        {
             "id": "Documentation",
             "name": "Documentation",
             "longname": "Documentation",
