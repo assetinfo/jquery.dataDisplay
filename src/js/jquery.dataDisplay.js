@@ -180,8 +180,6 @@
                         var instance = this.data(settingsArray.dataAttr);
                     }
                 }
-                // hold the instance against the calling element
-                $(this).data(settingsArray.dataAttr, instance);
             }
             // DataDisplay instance - fully intiated or destroyed
             return instance

@@ -83,7 +83,6 @@
         if ($(this).length) {
             var settingsArray = $.extend({}, defaults, void 0 !== optionsArray ? optionsArray : []), funcsArray = $.extend({}, funcs, void 0 !== settingsArray.funcs ? settingsArray.funcs : []);
             if (void 0 === $(this).data(settingsArray.dataAttr)) instance = $(this).data(settingsArray.dataAttr, new DataDisplay(this, settingsArray, funcsArray)); else if (void 0 !== options && "destroy" == options) instance = this.data(settingsArray.dataAttr).destroy(); else if (void 0 !== options) instance = this.data(settingsArray.dataAttr).destroy().init(this, settingsArray, funcsArray); else var instance = this.data(settingsArray.dataAttr);
-            $(this).data(settingsArray.dataAttr, instance);
         }
         return instance;
     };
