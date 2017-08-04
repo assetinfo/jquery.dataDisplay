@@ -4,6 +4,6 @@ require.config({
     "dataDisplay": "src/js/jquery.dataDisplay"
   },
   "shim": {
-    "jquery":        { "exports": "$" }
+    "jquery": { "exports": "$" }
   }
 });

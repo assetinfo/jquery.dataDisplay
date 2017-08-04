@@ -6,7 +6,7 @@
  * Email: gdixon@assetinfo.co.uk  
  * Licensed: MIT 
  * Requires: jQuery > 1.9 
- * Version: 0.0.1 
+ * Version: 0.0.2 
  */
 !function(factory) {
     "function" == typeof define && define.amd ? define([ "jquery" ], factory) : factory(jQuery);

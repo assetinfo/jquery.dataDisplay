@@ -1,6 +1,6 @@
 {
   "name": "jquery.dataDisplay",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A jQuery plugin that aids the developer in writing concise conditions against elements within a form based setting, in order to control the display of elements based on the state of a form.",
   "devDependencies": {
     "grunt": "1.0.1",

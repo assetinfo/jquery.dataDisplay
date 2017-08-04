@@ -6,7 +6,7 @@
  * Email: gdixon@assetinfo.co.uk
  * Licensed: MIT
  * Requires: jQuery > 1.9
- * Version: 0.0.1
+ * Version: 0.0.2
  */
 ;(function (factory) {
     if (typeof define === 'function' && define.amd) {
