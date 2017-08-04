@@ -37,7 +37,7 @@
      *     $('#container').dataDisplay({...});
      * });
      *
-     * @version 0.0.1
+     * @version 0.0.2
      * @author Graham Dixon - gdixon@assetinfo.co.uk
      * @namespace $.fn.dataDisplay
      * @memberof! $.fn
@@ -207,7 +207,7 @@
          *     $('#container').dataDisplay({...});
          * });
          *
-         * @version 0.0.1
+         * @version 0.0.2
          * @author Graham Dixon - gdixon@assetinfo.co.uk
          * @class DataDisplay
          * @memberof $.fn.dataDisplay
